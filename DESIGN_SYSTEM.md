@@ -107,16 +107,31 @@ Pro** (body).
 
 ## 4. Logo & Marks
 
-- Primary wordmark: "Valletta Industries" — used in nav/header, typically paired with
-  the red accent mark **[confirmed: red = `#FF002B`]**
-- Sub-brand: **Mission Protect** — an Active Shooter Learning Management System product
-  line; carries its own logo lockup (MP mark) but should stay visually subordinate to
-  the parent Valletta system when used together
+- Primary lockup **[confirmed — extracted from Bryan Paarmann's email signature,
+  `/assets/logo/valletta-soc-lockup.png`]**: white shield outline containing a red
+  eight-point cross mark, paired with the "VALLETTA INDUSTRIES" wordmark in a serif
+  display face (bold, wide capital letterforms — closer to a classical serif like
+  Cinzel/Trajan than the PowerPoint-safe Bookman Old Style substitute below; use the
+  real lockup image rather than re-setting the wordmark whenever possible). Logo
+  background is black (`#000000`, i.e. Operator Black).
+- Sub-brand: **SOC** — carries its own lockup (angled gold/bronze stripes + bold
+  condensed "SOC" wordmark in a rounded-rectangle frame) **[confirmed, same source]**.
+  Combined "Valletta Industries + SOC" lockup is the standard signature/letterhead
+  mark — divided by a thin vertical white rule, shield+wordmark on the left, SOC mark
+  on the right. Use the combined lockup (not the shield alone) on client-facing
+  materials where SOC is the relevant business line.
+  - **SOC Gold** [confirmed]: `#B8801D` — used only within the SOC sub-lockup's stripe
+    accent; not part of the primary Valletta palette, do not use elsewhere.
+  - Previously listed sub-brand "Mission Protect" (Active Shooter LMS) has not been
+    confirmed against real assets — treat as unconfirmed until a real lockup is supplied.
 - Clear space: maintain minimum clear space equal to the height of the mark's capital
   letter on all sides
-- Do not recolor the mark outside of red/black/white
+- Do not recolor the mark outside of red/black/white (or gold, within the SOC stripe only)
 - Do not place the red logo mark on busy photography without a solid-color safe area
   behind it
+- On decks/slides: place the combined lockup small and unobtrusive (a corner mark in a
+  title bar or footer), not as a dominant element — it credits the brand without
+  competing with slide content.
 
 ---
 

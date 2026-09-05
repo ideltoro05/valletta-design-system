@@ -12,6 +12,9 @@ closing banner) is unchanged — only the visual system was replaced:
 - Hub-and-spoke layout: a compact wheel (core purpose + 5 numbered pillars)
   with each pillar's full bullet detail in a surrounding card, so all
   original copy stays fully legible at presentation size
+- Combined Valletta Industries + SOC logo lockup (extracted from Bryan
+  Paarmann's email signature, now saved at `../assets/logo/`) placed in the
+  title bar for brand attribution
 
 ## Files
 
@@ -20,6 +23,7 @@ closing banner) is unchanged — only the visual system was replaced:
 | `valletta_culture_slide.png` | High-res raster (3072x3072) |
 | `valletta_culture_slide.pdf` | Vector PDF, 8x8in page |
 | `valletta_culture_slide.pptx` | PowerPoint, one 8x8in slide |
-| `valletta_culture_slide.html` | Self-contained source (fonts embedded) |
+| `valletta_culture_slide.html` | Self-contained source (fonts + logo embedded) |
 | `generate_slide.py` | Regenerates the HTML from data (run from this folder) |
 | `fonts_embed.css` | Base64-embedded Oswald/Inter used by the HTML |
+| `logo_b64.txt` | Base64 logo lockup embedded by the generator |

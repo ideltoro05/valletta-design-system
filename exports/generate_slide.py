@@ -163,6 +163,7 @@ for w in PILLARS:
 import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 fonts_css = open(os.path.join(HERE, "fonts_embed.css")).read()
+logo_b64 = open(os.path.join(HERE, "logo_b64.txt")).read().strip()
 
 html = f'''<!doctype html>
 <html><head><meta charset="utf-8">
@@ -176,6 +177,8 @@ svg.base {{ position:absolute; inset:0; }}
 .titlebar {{ position:absolute; left:0; top:0; width:768px; height:34px; background:{BLACK}; display:flex; align-items:center; justify-content:center; }}
 .titlebar .t {{ font-family:'Oswald'; font-weight:700; font-size:15px; letter-spacing:3px; color:{WHITE}; }}
 .titlebar .t span {{ color:{RED}; }}
+.titlebar .brand {{ position:absolute; left:14px; top:50%; transform:translateY(-50%); height:24px; display:flex; align-items:center; }}
+.titlebar .brand img {{ height:100%; width:auto; display:block; }}
 
 .card {{ position:absolute; background:{BLACK}; border:1px solid #2A2C30; color:{WHITE}; padding:10px 12px; }}
 .card:nth-of-type(odd) {{ background:{BLACK}; }}
@@ -214,7 +217,10 @@ svg.base {{ position:absolute; inset:0; }}
 </head>
 <body>
 <div class="stage">
-  <div class="titlebar"><div class="t">PHYSICAL SECURITY <span>FORCE</span> CULTURE</div></div>
+  <div class="titlebar">
+    <div class="brand"><img src="data:image/png;base64,{logo_b64}" alt="Valletta Industries / SOC"/></div>
+    <div class="t">PHYSICAL SECURITY <span>FORCE</span> CULTURE</div>
+  </div>
 
   <svg class="base" width="768" height="768" viewBox="0 0 768 768">
     <defs>{inner_ring}</defs>
