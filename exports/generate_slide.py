@@ -1,12 +1,14 @@
-import math
+import math, os
 
-CX, CY = 384, 404
-R_CENTER = 78
-R_WEDGE_IN = 82
-R_WEDGE_OUT = 176
-R_RING_IN = 176
-R_RING_OUT = 192
-R_TAGLINE = 96
+CANVAS_W, CANVAS_H = 768, 940
+CX, CY = 384, 460
+
+R_CENTER = 80
+R_WEDGE_IN = 86
+R_WEDGE_OUT = 330
+R_RING_IN = 330
+R_RING_OUT = 352
+R_TAGLINE = 100
 
 BLACK = "#0A0A0A"
 CHARCOAL = "#1C1D21"
@@ -41,7 +43,7 @@ ICONS = {
  "handshake": '<path d="M-15,-14 A15,15 0 0,1 14,-4" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M14,-4 L14,-11 M14,-4 L7,-5.5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M15,14 A15,15 0 0,1 -14,4" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M-14,4 L-14,11 M-14,4 L-7,5.5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>',
 }
 
-def icon_svg(name, size=24, color=RED):
+def icon_svg(name, size=22, color=RED):
     return f'<svg width="{size}" height="{size}" viewBox="-21 -21 42 42" color="{color}">{ICONS[name]}</svg>'
 
 PILLARS = [
@@ -92,13 +94,13 @@ PILLARS = [
      "icon":"handshake"},
 ]
 
-# card layout: pillar num -> card box + leader anchor on hub
-CARD_LAYOUT = {
-    1: dict(left=218, top=54,  width=332, height=140, cols=2),
-    2: dict(left=560, top=50,  width=200, height=205, cols=1),
-    5: dict(left=520, top=550, width=236, height=145, cols=1),
-    4: dict(left=12,  top=550, width=236, height=145, cols=1),
-    3: dict(left=8,   top=50,  width=200, height=205, cols=1),
+# left/top/width/align per pillar, verified to stay within R_WEDGE_OUT via corner-distance math
+LAYOUT = {
+    1: dict(left=276, top=182, width=216, height=174, align="center"),
+    2: dict(left=496, top=282, width=155, height=178, align="left"),
+    5: dict(left=496, top=460, width=155, height=178, align="left"),
+    4: dict(left=117, top=460, width=155, height=178, align="right"),
+    3: dict(left=117, top=282, width=155, height=178, align="right"),
 }
 
 wedge_svgs, divider_svgs, badge_svgs = [], [], []
@@ -108,59 +110,37 @@ for w in PILLARS:
     x1,y1 = pol(R_WEDGE_IN-4, a0)
     x2,y2 = pol(R_WEDGE_OUT+4, a0)
     divider_svgs.append(f'<line x1="{x1:.2f}" y1="{y1:.2f}" x2="{x2:.2f}" y2="{y2:.2f}" stroke="{RED}" stroke-width="1.4"/>')
-    bx, by = pol(R_WEDGE_OUT - 30, w["angle"])
-    badge_svgs.append(f'''<circle cx="{bx:.2f}" cy="{by:.2f}" r="14" fill="{RED}"/>
-    <text x="{bx:.2f}" y="{by+5:.2f}" text-anchor="middle" font-family="Oswald" font-weight="700" font-size="14" fill="{WHITE}">{w["num"]}</text>''')
-    ix, iy = pol((R_WEDGE_OUT + R_WEDGE_IN) / 2 - 6, w["angle"])
-    scale = 30/42
-    wedge_svgs.append(f'<g transform="translate({ix:.2f},{iy:.2f}) scale({scale:.3f})" color="{WHITE}">{ICONS[w["icon"]]}</g>')
 
-def arc_path(r, a_start, a_end, pid):
+def arc_path(r, a_start, a_end, pid, sweep=1):
     x1,y1 = pol(r, a_start)
     x2,y2 = pol(r, a_end)
-    large = 1 if (a_end - a_start) > 180 else 0
-    return f'<path id="{pid}" d="M {x1:.2f},{y1:.2f} A {r:.2f},{r:.2f} 0 {large} 1 {x2:.2f},{y2:.2f}" fill="none"/>'
+    large = 1 if abs(a_end - a_start) > 180 else 0
+    return f'<path id="{pid}" d="M {x1:.2f},{y1:.2f} A {r:.2f},{r:.2f} 0 {large} {sweep} {x2:.2f},{y2:.2f}" fill="none"/>'
 
+R_TITLE = (R_RING_IN + R_RING_OUT) / 2
+top_arc = arc_path(R_TITLE, -95, 95, "topArc", sweep=1)
+values_arc = arc_path(R_TITLE, 180+70, 180-70, "valuesArc", sweep=0)
 inner_ring = arc_path(R_TAGLINE, 0.1, 360, "innerRing")
 
-# leader lines from hub badge to nearest card edge
-leader_svgs = []
+blocks = []
 for w in PILLARS:
-    L = CARD_LAYOUT[w["num"]]
-    bx, by = pol(R_WEDGE_OUT - 30, w["angle"])
-    cx_ = L["left"] + L["width"]/2
-    cy_ = L["top"] + L["height"]/2
-    # connect to nearest edge midpoint of the card instead of center
-    if L["left"] > CX:  # card to the right
-        ex, ey = L["left"], L["top"] + 26
-    elif L["left"]+L["width"] < CX:  # card to the left
-        ex, ey = L["left"]+L["width"], L["top"] + 26
-    else:  # top wide card
-        ex, ey = cx_, L["top"] + L["height"]
-    leader_svgs.append(f'<line x1="{bx:.2f}" y1="{by:.2f}" x2="{ex:.2f}" y2="{ey:.2f}" stroke="{RED}" stroke-width="1.2" stroke-dasharray="2,2"/>')
-
-card_html = []
-for w in PILLARS:
-    L = CARD_LAYOUT[w["num"]]
+    L = LAYOUT[w["num"]]
     bullets_html = "".join(f'<li>{b}</li>' for b in w["bullets"])
-    cols_class = "cols2" if L["cols"] == 2 else "cols1"
+    head_justify = {"center":"center","left":"flex-start","right":"flex-end"}[L["align"]]
     block = f'''
-    <div class="card {cols_class}" style="left:{L["left"]}px; top:{L["top"]}px; width:{L["width"]}px; height:{L["height"]}px;">
-      <div class="c-head">
-        <span class="c-badge">{w["num"]}</span>
-        <span class="c-icon">{icon_svg(w["icon"])}</span>
-        <div class="c-headtext">
-          <div class="c-title">{w["title"]}</div>
-          <div class="c-sub">{w["sub"]}</div>
-        </div>
+    <div class="wedge-text align-{L["align"]}" style="left:{L["left"]}px; top:{L["top"]}px; width:{L["width"]}px; height:{L["height"]}px; text-align:{L["align"]};">
+      <div class="w-head" style="justify-content:{head_justify};">
+        <span class="w-badge">{w["num"]}</span>
+        <span class="w-icon">{icon_svg(w["icon"])}</span>
       </div>
-      <ul class="c-bullets">{bullets_html}</ul>
-      <div class="c-rule"></div>
-      <div class="c-mindset"><span class="label">MINDSET</span> &ldquo;{w["mindset"]}&rdquo;</div>
+      <div class="w-title">{w["title"]}</div>
+      <div class="w-sub">{w["sub"]}</div>
+      <ul class="w-bullets">{bullets_html}</ul>
+      <div class="w-rule"></div>
+      <div class="w-mindset"><span class="label">MINDSET</span> &ldquo;{w["mindset"]}&rdquo;</div>
     </div>'''
-    card_html.append(block)
+    blocks.append(block)
 
-import os
 HERE = os.path.dirname(os.path.abspath(__file__))
 fonts_css = open(os.path.join(HERE, "fonts_embed.css")).read()
 logo_b64 = open(os.path.join(HERE, "logo_b64.txt")).read().strip()
@@ -170,76 +150,71 @@ html = f'''<!doctype html>
 <style>
 {fonts_css}
 * {{ margin:0; padding:0; box-sizing:border-box; }}
-html,body {{ width:768px; height:768px; background:{FIELD_WHITE}; }}
-.stage {{ position:relative; width:768px; height:768px; font-family:'Inter',sans-serif; overflow:hidden; }}
+html,body {{ width:{CANVAS_W}px; height:{CANVAS_H}px; background:{FIELD_WHITE}; }}
+.stage {{ position:relative; width:{CANVAS_W}px; height:{CANVAS_H}px; font-family:'Inter',sans-serif; overflow:hidden; }}
 svg.base {{ position:absolute; inset:0; }}
 
-.titlebar {{ position:absolute; left:0; top:0; width:768px; height:34px; background:{BLACK}; display:flex; align-items:center; justify-content:center; }}
-.titlebar .t {{ font-family:'Oswald'; font-weight:700; font-size:15px; letter-spacing:3px; color:{WHITE}; }}
-.titlebar .t span {{ color:{RED}; }}
-.titlebar .brand {{ position:absolute; left:14px; top:50%; transform:translateY(-50%); height:24px; display:flex; align-items:center; }}
-.titlebar .brand img {{ height:100%; width:auto; display:block; }}
+.brandmark {{ position:absolute; left:0; top:16px; width:{CANVAS_W}px; display:flex; align-items:center; justify-content:center; }}
+.brandmark img {{ height:46px; width:auto; display:block; }}
 
-.card {{ position:absolute; background:{BLACK}; border:1px solid #2A2C30; color:{WHITE}; padding:10px 12px; }}
-.card:nth-of-type(odd) {{ background:{BLACK}; }}
-.c-head {{ display:flex; align-items:flex-start; gap:6px; margin-bottom:6px; }}
-.c-badge {{ display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:50%; background:{RED}; color:{WHITE}; font-family:'Oswald'; font-weight:700; font-size:11px; flex:none; margin-top:1px; }}
-.c-icon svg {{ display:block; flex:none; }}
-.c-headtext {{ flex:1; min-width:0; }}
-.c-title {{ font-family:'Oswald'; font-weight:700; font-size:13.5px; letter-spacing:0.2px; line-height:1.1; text-transform:uppercase; }}
-.c-sub {{ font-family:'Inter'; font-weight:700; font-size:7.6px; letter-spacing:0.6px; text-transform:uppercase; color:{RED}; margin-top:2px; }}
-.c-bullets {{ list-style:none; }}
-.cols1 .c-bullets {{ column-count:1; }}
-.cols2 .c-bullets {{ column-count:2; column-gap:18px; }}
-.c-bullets li {{ font-size:7.9px; line-height:1.32; color:#E7E7E5; position:relative; padding-left:8px; margin-bottom:2px; break-inside:avoid; }}
-.c-bullets li::before {{ content:''; position:absolute; left:0; top:4px; width:3.2px; height:3.2px; background:{RED}; }}
-.c-rule {{ height:1px; background:#3C3E42; margin:6px 0 4px 0; width:100%; }}
-.c-mindset {{ font-size:7.4px; font-style:italic; color:{MUTED_ON_DARK}; line-height:1.3; }}
-.c-mindset .label {{ font-style:normal; font-weight:700; color:{WHITE}; letter-spacing:0.5px; font-size:6.9px; }}
+.wedge-text {{ position:absolute; color:{WHITE}; overflow:hidden; }}
+.w-head {{ display:flex; align-items:center; gap:6px; margin-bottom:5px; }}
+.w-badge {{ display:inline-flex; align-items:center; justify-content:center; width:21px; height:21px; border-radius:50%; background:{RED}; color:{WHITE}; font-family:'Oswald',sans-serif; font-weight:700; font-size:11.5px; flex:none; }}
+.w-icon svg {{ display:block; }}
+.w-title {{ font-family:'Oswald',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.2px; line-height:1.08; text-transform:uppercase; }}
+.w-sub {{ font-family:'Inter',sans-serif; font-weight:700; font-size:8px; letter-spacing:0.6px; text-transform:uppercase; color:{RED}; margin-top:3px; }}
+.w-bullets {{ list-style:none; margin-top:5px; padding:0; }}
+.w-bullets li {{ font-size:7.6px; line-height:1.28; color:#E7E7E5; position:relative; padding-left:8px; margin-bottom:1.5px; }}
+.align-right .w-bullets li {{ padding-left:0; padding-right:8px; }}
+.w-bullets li::before {{ content:''; position:absolute; left:0; top:4px; width:3px; height:3px; background:{RED}; }}
+.align-right .w-bullets li::before {{ left:auto; right:0; }}
+.w-rule {{ height:1px; background:#3C3E42; margin:4px 0 3px 0; width:100%; }}
+.w-mindset {{ font-size:7.2px; font-style:italic; color:{MUTED_ON_DARK}; line-height:1.28; }}
+.w-mindset .label {{ font-style:normal; font-weight:700; color:{WHITE}; letter-spacing:0.5px; font-size:6.8px; }}
 
 .center-wrap {{ position:absolute; left:{CX-R_CENTER}px; top:{CY-R_CENTER}px; width:{2*R_CENTER}px; height:{2*R_CENTER}px; border-radius:50%; background:{BLACK}; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:10px; }}
 .core-shield {{ margin-bottom:5px; }}
-.core-eyebrow {{ font-family:'Inter'; font-weight:700; font-size:7.5px; letter-spacing:1.6px; color:{RED}; margin-bottom:4px; }}
-.core-line {{ font-family:'Oswald'; font-weight:700; font-size:13.5px; letter-spacing:0.2px; line-height:1.16; text-transform:uppercase; color:{WHITE}; }}
+.core-eyebrow {{ font-family:'Inter'; font-weight:700; font-size:7.6px; letter-spacing:1.6px; color:{RED}; margin-bottom:4px; }}
+.core-line {{ font-family:'Oswald'; font-weight:700; font-size:13.8px; letter-spacing:0.2px; line-height:1.16; text-transform:uppercase; color:{WHITE}; }}
 .core-line.accent {{ color:{RED}; }}
 
-.values-line {{ position:absolute; left:0; top:706px; width:768px; text-align:center; font-family:'Inter'; font-weight:700; font-size:10.5px; letter-spacing:2.2px; color:{BLACK}; }}
-.values-line span {{ color:{RED}; }}
-.banner {{ position:absolute; left:96px; top:730px; width:576px; height:34px; background:{BLACK}; display:flex; flex-direction:column; align-items:center; justify-content:center; }}
-.banner .l1 {{ font-family:'Oswald'; font-weight:700; font-size:12.5px; letter-spacing:1px; color:{WHITE}; }}
-.banner .l2 {{ font-family:'Inter'; font-weight:700; font-size:7.6px; letter-spacing:1.2px; color:{RED}; margin-top:2px; }}
-.tick {{ position:absolute; width:11px; height:11px; }}
-.tick.tl {{ left:96px; top:730px; border-top:2px solid {RED}; border-left:2px solid {RED}; }}
-.tick.tr {{ left:661px; top:730px; border-top:2px solid {RED}; border-right:2px solid {RED}; }}
-.tick.bl {{ left:96px; top:753px; border-bottom:2px solid {RED}; border-left:2px solid {RED}; }}
-.tick.br {{ left:661px; top:753px; border-bottom:2px solid {RED}; border-right:2px solid {RED}; }}
+.banner {{ position:absolute; left:0; top:{CY+R_RING_OUT+18}px; width:{CANVAS_W}px; height:56px; background:{BLACK}; display:flex; flex-direction:column; align-items:center; justify-content:center; }}
+.banner .l1 {{ font-family:'Oswald'; font-weight:700; font-size:15px; letter-spacing:1px; color:{WHITE}; }}
+.banner .l2 {{ font-family:'Inter'; font-weight:700; font-size:9.5px; letter-spacing:1.3px; color:{RED}; margin-top:4px; }}
+.tick {{ position:absolute; width:12px; height:12px; }}
+.tick.tl {{ left:0px; top:0px; border-top:2px solid {RED}; border-left:2px solid {RED}; }}
+.tick.tr {{ right:0px; top:0px; border-top:2px solid {RED}; border-right:2px solid {RED}; }}
+.tick.bl {{ left:0px; bottom:0px; border-bottom:2px solid {RED}; border-left:2px solid {RED}; }}
+.tick.br {{ right:0px; bottom:0px; border-bottom:2px solid {RED}; border-right:2px solid {RED}; }}
+.banner-wrap {{ position:absolute; left:96px; top:{CY+R_RING_OUT+18}px; width:{CANVAS_W-192}px; height:56px; }}
 </style>
 </head>
 <body>
 <div class="stage">
-  <div class="titlebar">
-    <div class="brand"><img src="data:image/png;base64,{logo_b64}" alt="Valletta Industries / SOC"/></div>
-    <div class="t">PHYSICAL SECURITY <span>FORCE</span> CULTURE</div>
-  </div>
+  <div class="brandmark"><img src="data:image/png;base64,{logo_b64}" alt="Valletta Industries / SOC"/></div>
 
-  <svg class="base" width="768" height="768" viewBox="0 0 768 768">
-    <defs>{inner_ring}</defs>
-    {''.join(leader_svgs)}
+  <svg class="base" width="{CANVAS_W}" height="{CANVAS_H}" viewBox="0 0 {CANVAS_W} {CANVAS_H}">
+    <defs>{top_arc}{values_arc}{inner_ring}</defs>
     <circle cx="{CX}" cy="{CY}" r="{R_RING_OUT}" fill="{BLACK}"/>
     {''.join(wedge_svgs)}
     {''.join(divider_svgs)}
     <circle cx="{CX}" cy="{CY}" r="{R_WEDGE_OUT}" fill="none" stroke="{RED}" stroke-width="2"/>
     <circle cx="{CX}" cy="{CY}" r="{R_WEDGE_IN}" fill="none" stroke="{RED}" stroke-width="1.4"/>
-    <text font-family="Inter" font-weight="600" font-size="7.6" letter-spacing="0.8" fill="{WHITE}">
+    <text font-family="Inter" font-weight="600" font-size="7.4" letter-spacing="0.8" fill="{WHITE}">
       <textPath href="#innerRing" startOffset="50%" text-anchor="middle">EVERY ACTION, DECISION, AND INTERACTION SUPPORTS THE SAFETY, SECURITY, AND SUCCESS OF THE ORGANIZATION</textPath>
     </text>
-    {''.join(badge_svgs)}
+    <text font-family="Oswald" font-weight="700" font-size="17" letter-spacing="2.4" fill="{WHITE}">
+      <textPath href="#topArc" startOffset="50%" text-anchor="middle">PHYSICAL SECURITY FORCE CULTURE</textPath>
+    </text>
+    <text font-family="Inter" font-weight="700" font-size="11" letter-spacing="2.2" fill="{WHITE}">
+      <textPath href="#valuesArc" startOffset="50%" text-anchor="middle">VIGILANCE &#8226; INTEGRITY &#8226; RESPECT &#8226; ACCOUNTABILITY &#8226; SERVICE</textPath>
+    </text>
   </svg>
 
-  {''.join(card_html)}
+  {''.join(blocks)}
 
   <div class="center-wrap">
-    <svg class="core-shield" width="28" height="28" viewBox="-20 -20 40 40">
+    <svg class="core-shield" width="26" height="26" viewBox="-20 -20 40 40">
       <path d="M0,-17 L14,-10.5 V3.5 C14,13 7,18.5 0,21 C-7,18.5 -14,13 -14,3.5 V-10.5 Z" fill="none" stroke="{RED}" stroke-width="2"/>
       <path d="M0,-11 L4.5,7 M-4,-2 h8" fill="none" stroke="{WHITE}" stroke-width="1.3"/>
       <rect x="-3.4" y="2.5" width="6.8" height="5.5" rx="1" fill="none" stroke="{WHITE}" stroke-width="1.3"/>
@@ -250,8 +225,9 @@ svg.base {{ position:absolute; inset:0; }}
     <div class="core-line">Enable Operations.</div>
   </div>
 
-  <div class="values-line">VIGILANCE <span>&#8226;</span> INTEGRITY <span>&#8226;</span> RESPECT <span>&#8226;</span> ACCOUNTABILITY <span>&#8226;</span> SERVICE</div>
-  <div class="tick tl"></div><div class="tick tr"></div><div class="tick bl"></div><div class="tick br"></div>
+  <div class="banner-wrap">
+    <div class="tick tl"></div><div class="tick tr"></div><div class="tick bl"></div><div class="tick br"></div>
+  </div>
   <div class="banner">
     <div class="l1">ONE TEAM. ONE STANDARD. ONE MISSION.</div>
     <div class="l2">PROTECTING TODAY. ENABLING TOMORROW.</div>
