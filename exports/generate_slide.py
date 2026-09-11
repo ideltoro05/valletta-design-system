@@ -145,13 +145,10 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 fonts_css = open(os.path.join(HERE, "fonts_embed.css")).read()
 logo_b64 = open(os.path.join(HERE, "logo_b64.txt")).read().strip()
 
-html = f'''<!doctype html>
-<html><head><meta charset="utf-8">
-<style>
+inner_style = f'''
 {fonts_css}
-* {{ margin:0; padding:0; box-sizing:border-box; }}
-html,body {{ width:{CANVAS_W}px; height:{CANVAS_H}px; background:{FIELD_WHITE}; }}
-.stage {{ position:relative; width:{CANVAS_W}px; height:{CANVAS_H}px; font-family:'Inter',sans-serif; overflow:hidden; }}
+.vw-scale-wrap {{ width:100%; max-width:{CANVAS_W}px; margin:0 auto; aspect-ratio:{CANVAS_W}/{CANVAS_H}; position:relative; }}
+.stage {{ position:absolute; left:0; top:0; width:{CANVAS_W}px; height:{CANVAS_H}px; font-family:'Inter',sans-serif; overflow:hidden; transform-origin:top left; background:{FIELD_WHITE}; }}
 svg.base {{ position:absolute; inset:0; }}
 
 .brandmark {{ position:absolute; left:0; top:16px; width:{CANVAS_W}px; display:flex; align-items:center; justify-content:center; }}
@@ -187,9 +184,9 @@ svg.base {{ position:absolute; inset:0; }}
 .tick.bl {{ left:0px; bottom:0px; border-bottom:2px solid {RED}; border-left:2px solid {RED}; }}
 .tick.br {{ right:0px; bottom:0px; border-bottom:2px solid {RED}; border-right:2px solid {RED}; }}
 .banner-wrap {{ position:absolute; left:96px; top:{CY+R_RING_OUT+18}px; width:{CANVAS_W-192}px; height:56px; }}
-</style>
-</head>
-<body>
+'''
+
+inner_body = f'''
 <div class="stage">
   <div class="brandmark"><img src="data:image/png;base64,{logo_b64}" alt="Valletta Industries / SOC"/></div>
 
@@ -233,8 +230,46 @@ svg.base {{ position:absolute; inset:0; }}
     <div class="l2">PROTECTING TODAY. ENABLING TOMORROW.</div>
   </div>
 </div>
+'''
+
+standalone_html = f'''<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+* {{ margin:0; padding:0; box-sizing:border-box; }}
+html,body {{ width:{CANVAS_W}px; height:{CANVAS_H}px; background:{FIELD_WHITE}; }}
+{inner_style}
+.vw-scale-wrap {{ max-width:none; width:{CANVAS_W}px; height:{CANVAS_H}px; aspect-ratio:auto; }}
+.stage {{ position:relative; }}
+</style>
+</head>
+<body>
+<div class="vw-scale-wrap">{inner_body}</div>
 </body></html>'''
 
 with open(os.path.join(HERE, "valletta_culture_slide.html"),"w") as f:
-    f.write(html)
+    f.write(standalone_html)
+
+artifact_html = f'''<title>Physical Security Force Culture</title>
+<style>
+* {{ margin:0; padding:0; box-sizing:border-box; }}
+body {{ background:{FIELD_WHITE}; padding-block:24px; padding-inline:16px; }}
+{inner_style}
+</style>
+<div class="vw-scale-wrap" id="scaleWrap">{inner_body}</div>
+<script>
+(function(){{
+  var wrap = document.getElementById('scaleWrap');
+  var stage = wrap.querySelector('.stage');
+  function fit(){{
+    var w = wrap.getBoundingClientRect().width;
+    var s = w / {CANVAS_W};
+    stage.style.transform = 'scale(' + s + ')';
+  }}
+  new ResizeObserver(fit).observe(wrap);
+  fit();
+}})();
+</script>'''
+
+with open(os.path.join(HERE, "valletta_culture_slide_artifact.html"),"w") as f:
+    f.write(artifact_html)
 print("written")
