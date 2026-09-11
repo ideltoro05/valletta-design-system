@@ -10,7 +10,8 @@ documents.
 |---|---|
 | `DESIGN_SYSTEM.md` | Full human-readable brand system — colors, type, tone, layout rules, slide templates |
 | `tokens.json` | Same system in machine-readable form (colors, type scale, credentials) for tools/scripts to consume |
-| `assets/` | Drop real logo files and any official brand assets here (empty by default — see below) |
+| `assets/logo/` | Real Valletta logo files (icon + lockup) |
+| `assets/mission-protect/` | Real Mission Protect product screenshots |
 
 ## What's real vs. extrapolated
 

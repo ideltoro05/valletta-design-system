@@ -1,11 +1,11 @@
 # Valletta Industries — Design System
 **Version 1.0 — built for use with Claude (presentations, docs, decks)**
 
-> Source: extracted from vallettaindustries.com (public site content, live June 2026).
-> The site itself doesn't publish a formal brand book, so a few values below (exact hex
-> supporting palette, typeface pairing) are reasonable extrapolations from the live site,
-> flagged inline as **[extrapolated]**. Confirmed values (pulled directly from site code)
-> are flagged **[confirmed]**. Swap in real values any time — see "How to Customize" at
+> Source: extracted from vallettaindustries.com (public site content, live June 2026),
+> plus real logo files and Mission Protect product screenshots supplied directly by
+> Valletta and stored in `/assets`. Values pulled from those real assets are flagged
+> **[confirmed]**; values still inferred from the public site alone are flagged
+> **[extrapolated]**. Swap in more real values any time — see "How to Customize" at
 > the bottom.
 
 ---
@@ -79,19 +79,18 @@ consumer-marketing tone (no "unlock," "supercharge," "game-changing").
 
 ## 3. Typography
 
-**[extrapolated — no webfont was exposed in the page source]**
+**Headline typeface [confirmed from the real logo lockup, `/assets/logo/valletta-lockup.png`]:**
+the actual wordmark is set in a refined, high-contrast **Didone-style serif** (thin
+horizontal strokes, thick verticals — in the Bodoni/Didot family), regular weight, wide
+letter-spacing, ALL CAPS — not a bold slab serif. This **supersedes the earlier
+Bookman Old Style guess below**, which read far too heavy/blocky next to the real mark.
 
 | Role | Font (PowerPoint-safe) | Notes |
 |------|------------------------|-------|
-| Headlines / Titles | **Bookman Old Style**, Bold, all-caps, tight tracking | Site headers render as bold sans caps; Bookman Old Style bold-caps gives a similar authoritative block-letter feel while staying in the PowerPoint safe-font list |
-| Section labels / eyebrows | **Arial**, Bold, all-caps, letter-spaced | Matches the site's small caps sub-labels (e.g. "ENGINEERING MANAGEMENT") |
-| Body copy | **Calibri** or **Arial**, Regular | Site body copy is a clean, unadorned sans-serif |
-| Captions / metadata | **Arial**, Regular, Steel Gray | Certification numbers, credential lines |
-
-If you have Anthropic/Claude Design access to real Adobe/Google fonts (not just
-PowerPoint-safe), a closer match to the live site's condensed bold headline style would
-be **Oswald** or **Barlow Condensed** (headlines) paired with **Inter** or **Source Sans
-Pro** (body).
+| Headlines / Titles | **Cambria**, Regular (not bold), all-caps, wide tracking | Closest PowerPoint-safe match to the real Didone-style wordmark — moderate-contrast serif reads far closer than a slab serif. If you have real Adobe/Google font access, use **Bodoni** or **Didot** directly to match the logo exactly. |
+| Section labels / eyebrows | **Arial**, Bold, all-caps, letter-spaced | Matches the site's small caps sub-labels (e.g. "ENGINEERING MANAGEMENT") **[extrapolated]** |
+| Body copy | **Calibri** or **Arial**, Regular | Site body copy is a clean, unadorned sans-serif **[extrapolated]** |
+| Captions / metadata | **Arial**, Regular, Steel Gray | Certification numbers, credential lines **[extrapolated]** |
 
 ### Type scale for decks
 | Element | Size | Weight | Case |
@@ -107,16 +106,48 @@ Pro** (body).
 
 ## 4. Logo & Marks
 
-- Primary wordmark: "Valletta Industries" — used in nav/header, typically paired with
-  the red accent mark **[confirmed: red = `#FF002B`]**
-- Sub-brand: **Mission Protect** — an Active Shooter Learning Management System product
-  line; carries its own logo lockup (MP mark) but should stay visually subordinate to
-  the parent Valletta system when used together
+**[confirmed — real files in `/assets/logo`]**
+
+- **The mark is a stylized Maltese cross** (eight-pointed, built from four triangular
+  wedges) in Valletta Red `#FF002B` — a deliberate nod to Valletta, the capital of Malta,
+  and the Maltese cross as Malta's national symbol. This is the icon to use everywhere
+  the brand needs a compact mark (favicons, badges, the corner of a slide).
+- **Files:**
+  - `assets/logo/valletta-mark.png` — icon only, transparent background, near-square
+    (482×513). Use on **either** light or dark slide backgrounds — it's pure red on
+    transparency, no light/dark variant needed.
+  - `assets/logo/valletta-lockup.png` — full horizontal lockup (icon + "VALLETTA
+    INDUSTRIES" wordmark in black). **Light backgrounds only** — the wordmark text is
+    black with no transparent/white variant currently on file. On dark slides, pair
+    `valletta-mark.png` with a separately typeset white wordmark (Cambria, see §3)
+    until a white-text lockup file is provided.
+  - `assets/logo/valletta-mark-wide.png` — the same icon on a wide (2000×420) canvas,
+    useful when a lockup-shaped placeholder is needed but only the icon is available.
 - Clear space: maintain minimum clear space equal to the height of the mark's capital
-  letter on all sides
-- Do not recolor the mark outside of red/black/white
+  letter on all sides.
+- Do not recolor the mark outside of red/black/white.
 - Do not place the red logo mark on busy photography without a solid-color safe area
-  behind it
+  behind it.
+
+### Sub-brand: Mission Protect
+
+Mission Protect is Valletta's AI-enabled training/LMS product (course catalog, scenario
+training modules, learner progress tracking). **[confirmed from product screenshots,
+`/assets/mission-protect/`]** — its own product UI runs a **distinct accent identity**,
+not the parent red/black/white system:
+
+| Role | Value | Notes |
+|---|---|---|
+| Primary gradient | `#7C32DF` → `#0916DC` (purple → blue) | Primary CTA buttons ("Start Training"), progress accents |
+| Wordmark | "MISSION PROTECT" | Black, bold, sans-serif, stacked two-line lockup with an angular "M" mark |
+| Course-badge treatment | Navy `#1C1C61` shield/crest with gold border, red cross mark, "SECURITY — PROTECT SERVE LEAD" banner | Used as course-card art *inside* Mission Protect — a distinct badge style from the flat corporate mark, not a substitute for it |
+
+**When representing Mission Protect inside a Valletta-branded deck:** keep the deck's
+own black/red/white system for everything around it (headlines, layout, other slides),
+but let an actual Mission Protect screenshot or its purple/blue gradient appear *within
+its own callout/frame* — don't recolor Mission Protect's UI into Valletta red, and don't
+bleed the purple into the rest of the deck. It stays visually subordinate to the parent
+system by appearing only inside its own contained visual, exactly as a screenshot would.
 
 ---
 
@@ -203,20 +234,27 @@ color.text.muted        = #5B5F66
 color.border            = #D8D9DB
 color.text.onDark       = #FFFFFF
 
-font.headline           = Bookman Old Style, Bold, ALL CAPS
+font.headline           = Cambria, Regular, ALL CAPS, wide tracking (real mark is Bodoni/Didot-style)
 font.label              = Arial, Bold, ALL CAPS, letter-spaced
 font.body               = Calibri / Arial, Regular
+
+logo.icon               = assets/logo/valletta-mark.png        (any background)
+logo.lockup             = assets/logo/valletta-lockup.png       (light backgrounds only)
+missionProtect.gradient = #7C32DF -> #0916DC (purple -> blue; Mission Protect's own UI only)
 ```
 
 ---
 
 ## 9. How to Customize This File
 
-This system was built from public site content only — it does **not** include your
-actual logo files, exact PMS/hex brand colors from a style guide, or licensed fonts if
-you have them. To make it fully accurate:
-1. Drop your real logo files (SVG/PNG/EPS) into `/assets/logo/` in this repo
-2. If you have an actual brand guide PDF, upload it and I can extract exact hex values,
-   type specs, and usage rules to replace the "[extrapolated]" entries above
-3. Update section 2/3 hex and font values directly in this file — everything else
-   (layout system, slide templates, tone) will still apply
+Real logo files and Mission Protect product screenshots are now in `/assets` (see §4) —
+the headline typeface and logo/mark guidance above are confirmed from them. What's
+still open:
+1. **A white/light version of the full lockup** (`valletta-lockup.png` is black-text,
+   light-background-only) — needed to put the full lockup, not just the icon, on dark
+   slides. Drop it in `/assets/logo/` as `valletta-lockup-white.png` any time.
+2. **Licensed Bodoni/Didot font files**, if available, would let decks match the
+   headline typeface exactly instead of the Cambria substitute.
+3. Section 2's neutral palette (Operator Black, Tactical Charcoal, Field White) is
+   still **[extrapolated]** from the public site — upload an official style guide PDF
+   if one exists and I'll reconcile it against these values.
