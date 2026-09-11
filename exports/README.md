@@ -1,30 +1,39 @@
 # Physical Security Force Culture — Valletta Redesign
 
-Redesign of `Potential_Culture_Slide.pdf` applying the Valletta Industries
-design system (`../DESIGN_SYSTEM.md`, `../tokens.json`). All original text
-(titles, subheads, bullet points, mindset quotes, ring tagline, values,
-closing banner) is unchanged — only the visual system was replaced:
+Redesign of `Potential_Culture_Slide.pdf` as a clean editorial document in
+the Valletta Industries design system (`../DESIGN_SYSTEM.md`,
+`../tokens.json`). All original text (titles, subheads, bullet points,
+mindset quotes, ring tagline, values, closing banner) is unchanged — only
+the visual system was replaced.
 
-- Black / Field White / single red accent palette (no rainbow wedge colors)
-- Oswald (headlines) + Inter (body/labels), per the system's Claude-Design
-  font guidance
-- Thin red "tick"/divider motif on wedge boundaries and corner accents
-- Same composition as the original: one wheel with a curved title arc,
-  5 numbered pillar wedges (badge + icon + title + subhead + bullets +
-  mindset quote, directly in the wedge), a center "core purpose" medallion,
-  an inner tagline ring, a curved values line, and a closing banner
-- Combined Valletta Industries + SOC logo lockup (extracted from Bryan
-  Paarmann's email signature, saved at `../assets/logo/`) placed above the
-  wheel for brand attribution
+This is the second pass: the first attempt kept the source PDF's circular
+wheel layout, which forced very small type and had wedge-divider lines
+crossing over text. This version drops the wheel entirely for a flowing,
+generously-spaced page — full-size headlines, real body-copy type sizes,
+and a clear top-to-bottom reading order — while still hitting every one of
+the original's structural beats:
+
+- Masthead with the combined Valletta Industries + SOC logo lockup
+  (extracted from Bryan Paarmann's email signature, saved at
+  `../assets/logo/`)
+- Hero headline + core-purpose statement in a full-bleed black band
+- Each of the 5 pillars as its own row: number, icon, title, subhead,
+  bullets, and its mindset quote as a pull-quote
+- Values line and closing banner in the same black/red/white system
+
+Palette: Operator Black / Field White / a single red accent (never used as
+a large fill). Type: Oswald (headlines) + Inter (body/labels), per the
+system's Claude-Design font guidance.
 
 ## Files
 
 | File | Format |
 |---|---|
-| `valletta_culture_slide.png` | High-res raster (3072x3760, 4x) |
-| `valletta_culture_slide.pdf` | Vector PDF, 8x9.79in page |
-| `valletta_culture_slide.pptx` | PowerPoint, one 8x9.79in slide |
+| `valletta_culture_slide.png` | High-res raster, full document (2000px wide) |
+| `valletta_culture_slide.pdf` | Paginated print PDF, US Letter (4 pages) |
+| `valletta_culture_slide.pptx` | PowerPoint — one continuous 10x28.15in slide matching the document layout (not a slide-per-section deck; ask if you need it split into a standard-size deck instead) |
 | `valletta_culture_slide.html` | Self-contained source (fonts + logo embedded) |
-| `generate_slide.py` | Regenerates the HTML from data (run from this folder) |
+| `valletta_culture_slide_artifact.html` | Responsive version (same design, scales to phone width) |
+| `generate_slide.py` | Regenerates all HTML from data (run from this folder) |
 | `fonts_embed.css` | Base64-embedded Oswald/Inter used by the HTML |
 | `logo_b64.txt` | Base64 logo lockup embedded by the generator |
