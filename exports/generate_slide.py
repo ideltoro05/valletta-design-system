@@ -7,7 +7,9 @@ RED = "#FF002B"
 STEEL = "#5B5F66"
 LINE_GRAY = "#D8D9DB"
 WHITE = "#FFFFFF"
-INK = "#17181A"
+MUTED_ON_DARK = "#A6A9AE"
+
+CANVAS_W, CANVAS_H = 2000, 950
 
 ICONS = {
  "people": '<path d="M-13,4 a6.2,6.2 0 1,1 0.01,0 M13,4 a5.4,5.4 0 1,1 0.01,0 M0,-8.5 a7,7 0 1,1 0.01,0" fill="none" stroke="currentColor" stroke-width="2.1"/><path d="M-20,18 c0,-8 5,-12.5 7,-12.5 M20,18 c0,-8 -5,-12.5 -7,-12.5 M-10,18 c0,-9.5 7,-15 10,-15 c3,0 10,5.5 10,15" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"/>',
@@ -17,7 +19,7 @@ ICONS = {
  "handshake": '<path d="M-15,-14 A15,15 0 0,1 14,-4" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M14,-4 L14,-11 M14,-4 L7,-5.5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M15,14 A15,15 0 0,1 -14,4" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M-14,4 L-14,11 M-14,4 L-7,5.5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>',
 }
 
-def icon_svg(name, size=34, color=RED):
+def icon_svg(name, size=30, color=RED):
     return f'<svg width="{size}" height="{size}" viewBox="-21 -21 42 42" color="{color}">{ICONS[name]}</svg>'
 
 PILLARS = [
@@ -63,29 +65,22 @@ PILLARS = [
      "icon":"action"},
 ]
 
-pillar_blocks = []
+col_blocks = []
 for i, p in enumerate(PILLARS):
     bullets_html = "".join(f'<li>{b}</li>' for b in p["bullets"])
-    divider = '<div class="pillar-divider"></div>' if i > 0 else ''
-    pillar_blocks.append(f'''
-    {divider}
-    <article class="pillar">
-      <div class="pillar-num">{p["num"]:02d}</div>
-      <div class="pillar-body">
-        <div class="pillar-head">
-          <span class="pillar-icon">{icon_svg(p["icon"])}</span>
-          <div class="pillar-headtext">
-            <h2>{p["title"]}</h2>
-            <div class="pillar-sub">{p["sub"]}</div>
-          </div>
-        </div>
-        <ul class="pillar-bullets">{bullets_html}</ul>
+    sep = '<div class="col-sep"></div>' if i > 0 else ''
+    col_blocks.append(f'''
+    {sep}
+    <div class="col">
+      <div class="col-top">
+        <span class="col-num">{p["num"]:02d}</span>
+        <span class="col-icon">{icon_svg(p["icon"])}</span>
       </div>
-      <blockquote class="pillar-mindset">
-        <p>{p["mindset"]}</p>
-        <footer>Mindset</footer>
-      </blockquote>
-    </article>''')
+      <h2>{p["title"]}</h2>
+      <div class="col-sub">{p["sub"]}</div>
+      <ul class="col-bullets">{bullets_html}</ul>
+      <div class="col-mindset"><p>{p["mindset"]}</p><span>Mindset</span></div>
+    </div>''')
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 fonts_css = open(os.path.join(HERE, "fonts_embed.css")).read()
@@ -93,93 +88,72 @@ logo_b64 = open(os.path.join(HERE, "logo_b64.txt")).read().strip()
 
 inner_style = f'''
 {fonts_css}
-.doc {{ max-width:920px; margin:0 auto; font-family:'Inter',sans-serif; color:{INK}; }}
+.page {{ width:{CANVAS_W}px; height:{CANVAS_H}px; background:{FIELD_WHITE}; font-family:'Inter',sans-serif; position:relative; overflow:hidden; }}
 
-.masthead {{ display:flex; align-items:center; justify-content:space-between; padding:44px 0 36px; border-bottom:1px solid {LINE_GRAY}; }}
-.masthead img {{ height:52px; width:auto; display:block; }}
-.masthead .doctype {{ font-family:'Inter'; font-weight:700; font-size:11px; letter-spacing:2.2px; color:{STEEL}; text-align:right; text-transform:uppercase; }}
+.masthead {{ height:118px; display:flex; align-items:center; justify-content:space-between; padding:0 56px; }}
+.masthead img {{ height:58px; width:auto; display:block; }}
+.masthead .title-block {{ text-align:right; }}
+.masthead .eyebrow {{ font-family:'Inter'; font-weight:700; font-size:12px; letter-spacing:2.6px; color:{RED}; text-transform:uppercase; }}
+.masthead h1 {{ font-family:'Oswald'; font-weight:700; font-size:34px; letter-spacing:0.3px; text-transform:uppercase; color:{BLACK}; line-height:1.05; margin-top:4px; }}
 
-.hero {{ padding:64px 0 56px; }}
-.eyebrow {{ font-family:'Inter'; font-weight:700; font-size:12px; letter-spacing:3px; color:{RED}; text-transform:uppercase; margin-bottom:14px; }}
-.hero h1 {{ font-family:'Oswald'; font-weight:700; font-size:clamp(40px,7vw,68px); line-height:1.03; letter-spacing:0.2px; text-transform:uppercase; color:{BLACK}; text-wrap:balance; }}
-.hero h1 .accent {{ color:{RED}; }}
-.hero .dek {{ margin-top:20px; font-size:17px; line-height:1.6; color:{STEEL}; max-width:62ch; }}
+.core {{ height:172px; background:{BLACK}; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; padding:0 60px; }}
+.core::before, .core::after {{ content:''; position:absolute; width:20px; height:20px; border-color:{RED}; border-style:solid; }}
+.core::before {{ left:22px; top:18px; border-width:2px 0 0 2px; }}
+.core::after {{ right:22px; bottom:18px; border-width:0 2px 2px 0; }}
+.core .eyebrow {{ font-family:'Inter'; font-weight:700; font-size:11.5px; letter-spacing:2.4px; color:{RED}; text-transform:uppercase; margin-bottom:10px; }}
+.core .statement {{ font-family:'Oswald'; font-weight:700; font-size:33px; letter-spacing:0.2px; text-transform:uppercase; color:{WHITE}; line-height:1.15; }}
+.core .statement .accent {{ color:{RED}; }}
+.core .tagline {{ margin-top:10px; font-size:13.5px; color:#B9BBBE; max-width:80ch; line-height:1.5; }}
 
-.core-purpose {{ background:{BLACK}; color:{WHITE}; padding:56px 48px; margin:0 -48px 72px; border-radius:2px; position:relative; }}
-.core-purpose::before, .core-purpose::after {{ content:''; position:absolute; width:22px; height:22px; border-color:{RED}; border-style:solid; }}
-.core-purpose::before {{ left:20px; top:20px; border-width:2px 0 0 2px; }}
-.core-purpose::after {{ right:20px; bottom:20px; border-width:0 2px 2px 0; }}
-.core-purpose .eyebrow {{ text-align:center; color:{RED}; }}
-.core-statement {{ font-family:'Oswald'; font-weight:700; font-size:clamp(26px,4.2vw,40px); line-height:1.18; text-align:center; text-transform:uppercase; letter-spacing:0.2px; }}
-.core-statement .accent {{ color:{RED}; }}
-.core-tagline {{ text-align:center; margin-top:22px; font-size:15px; color:#B9BBBE; max-width:56ch; margin-left:auto; margin-right:auto; line-height:1.6; }}
+.cols {{ height:430px; display:flex; padding:0 40px; }}
+.col {{ flex:1; min-width:0; padding:26px 22px 0; display:flex; flex-direction:column; }}
+.col-sep {{ width:1px; background:{LINE_GRAY}; margin:26px 0 30px; }}
+.col-top {{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }}
+.col-num {{ font-family:'Oswald'; font-weight:700; font-size:26px; color:{RED}; }}
+.col-icon {{ width:38px; height:38px; border:1.5px solid {RED}; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; }}
+.col h2 {{ font-family:'Oswald'; font-weight:700; font-size:19.5px; letter-spacing:0.2px; text-transform:uppercase; color:{BLACK}; line-height:1.14; min-height:46px; }}
+.col-sub {{ font-family:'Inter'; font-weight:700; font-size:10.5px; letter-spacing:1px; color:{RED}; text-transform:uppercase; margin-top:5px; margin-bottom:14px; }}
+.col-bullets {{ list-style:none; flex:none; }}
+.col-bullets li {{ position:relative; padding-left:15px; font-size:13.3px; line-height:1.48; color:{CHARCOAL}; margin-bottom:8px; }}
+.col-bullets li::before {{ content:''; position:absolute; left:0; top:6px; width:5px; height:5px; background:{RED}; }}
+.col-mindset {{ margin-top:20px; padding-top:16px; border-top:1px solid {LINE_GRAY}; }}
+.col-mindset p {{ font-family:'Inter'; font-style:italic; font-size:13px; line-height:1.42; color:{STEEL}; }}
+.col-mindset p::before {{ content:'\\201C'; }}
+.col-mindset p::after {{ content:'\\201D'; }}
+.col-mindset span {{ display:block; margin-top:7px; font-family:'Inter'; font-weight:700; font-size:9.5px; letter-spacing:1.4px; color:{BLACK}; text-transform:uppercase; }}
 
-.pillars {{ padding-bottom:8px; }}
-.pillar-divider {{ height:1px; background:{LINE_GRAY}; margin:0; }}
-.pillar {{ display:grid; grid-template-columns:88px 1fr 280px; column-gap:36px; padding:52px 0; align-items:start; }}
-.pillar-num {{ font-family:'Oswald'; font-weight:700; font-size:40px; color:{RED}; line-height:1; }}
-.pillar-head {{ display:flex; align-items:flex-start; gap:18px; margin-bottom:20px; }}
-.pillar-icon {{ flex:none; width:40px; height:40px; display:flex; align-items:center; justify-content:center; border:1.5px solid {RED}; border-radius:50%; }}
-.pillar-icon svg {{ display:block; }}
-.pillar h2 {{ font-family:'Oswald'; font-weight:700; font-size:27px; letter-spacing:0.2px; text-transform:uppercase; color:{BLACK}; line-height:1.12; }}
-.pillar-sub {{ font-family:'Inter'; font-weight:700; font-size:12px; letter-spacing:1.4px; color:{RED}; text-transform:uppercase; margin-top:6px; }}
-.pillar-bullets {{ list-style:none; max-width:56ch; }}
-.pillar-bullets li {{ position:relative; padding-left:20px; font-size:15.5px; line-height:1.55; color:{INK}; margin-bottom:9px; }}
-.pillar-bullets li::before {{ content:''; position:absolute; left:0; top:9px; width:7px; height:7px; background:{RED}; }}
-.pillar-mindset {{ border-left:2px solid {RED}; padding-left:20px; margin:0; }}
-.pillar-mindset p {{ font-family:'Inter'; font-style:italic; font-size:17px; line-height:1.5; color:{CHARCOAL}; }}
-.pillar-mindset p::before {{ content:'\\201C'; }}
-.pillar-mindset p::after {{ content:'\\201D'; }}
-.pillar-mindset footer {{ margin-top:10px; font-family:'Inter'; font-weight:700; font-size:11px; letter-spacing:1.6px; color:{STEEL}; text-transform:uppercase; }}
-
-.values-band {{ background:{BLACK}; color:{WHITE}; margin:56px -48px 0; padding:26px 48px; text-align:center; font-family:'Inter'; font-weight:700; font-size:14px; letter-spacing:2.6px; text-transform:uppercase; }}
-.values-band span {{ color:{RED}; padding:0 4px; }}
-
-.closing-banner {{ background:{BLACK}; color:{WHITE}; margin:0 -48px; padding:34px 48px 46px; text-align:center; }}
-.closing-banner .l1 {{ font-family:'Oswald'; font-weight:700; font-size:19px; letter-spacing:1.2px; }}
-.closing-banner .l2 {{ font-family:'Inter'; font-weight:700; font-size:11.5px; letter-spacing:1.8px; color:{RED}; margin-top:8px; text-transform:uppercase; }}
-
-@media (max-width:760px) {{
-  .pillar {{ grid-template-columns:1fr; row-gap:18px; }}
-  .pillar-num {{ font-size:30px; }}
-  .pillar-mindset {{ margin-top:4px; }}
-}}
-
-@media print {{
-  .pillar, .core-purpose, .masthead, .hero {{ break-inside:avoid; }}
-  .values-band, .closing-banner {{ break-before:avoid; }}
-}}
+.values {{ height:60px; background:{BLACK}; color:{WHITE}; display:flex; align-items:center; justify-content:center; font-family:'Inter'; font-weight:700; font-size:13px; letter-spacing:2.4px; text-transform:uppercase; border-top:1px solid #2A2C30; }}
+.values span {{ color:{RED}; padding:0 5px; }}
+.banner {{ height:110px; background:{BLACK}; color:{WHITE}; display:flex; flex-direction:column; align-items:center; justify-content:center; }}
+.banner .l1 {{ font-family:'Oswald'; font-weight:700; font-size:20px; letter-spacing:1.2px; }}
+.banner .l2 {{ font-family:'Inter'; font-weight:700; font-size:12px; letter-spacing:1.8px; color:{RED}; margin-top:7px; text-transform:uppercase; }}
 '''
 
 inner_body = f'''
-<div class="doc">
-  <header class="masthead">
+<div class="page">
+  <div class="masthead">
     <img src="data:image/png;base64,{logo_b64}" alt="Valletta Industries / SOC"/>
-    <div class="doctype">Culture Framework</div>
-  </header>
+    <div class="title-block">
+      <div class="eyebrow">Physical Security Division</div>
+      <h1>Physical Security Force Culture</h1>
+    </div>
+  </div>
 
-  <section class="hero">
-    <div class="eyebrow">Physical Security Division</div>
-    <h1>Physical Security<br><span class="accent">Force</span> Culture</h1>
-    <p class="dek">The behaviors and mindsets that define how every officer shows up, every shift.</p>
-  </section>
-
-  <section class="core-purpose">
+  <div class="core">
     <div class="eyebrow">Core Purpose</div>
-    <p class="core-statement">Protect people. <span class="accent">Secure assets.</span> Enable operations.</p>
-    <p class="core-tagline">Every action, decision, and interaction supports the safety, security, and success of the organization.</p>
-  </section>
+    <div class="statement">Protect People. <span class="accent">Secure Assets.</span> Enable Operations.</div>
+    <div class="tagline">Every action, decision, and interaction supports the safety, security, and success of the organization.</div>
+  </div>
 
-  <section class="pillars">
-    {''.join(pillar_blocks)}
-  </section>
+  <div class="cols">
+    {''.join(col_blocks)}
+  </div>
 
-  <div class="values-band">Vigilance <span>&#8226;</span> Integrity <span>&#8226;</span> Respect <span>&#8226;</span> Accountability <span>&#8226;</span> Service</div>
-
-  <footer class="closing-banner">
+  <div class="values">Vigilance <span>&#8226;</span> Integrity <span>&#8226;</span> Respect <span>&#8226;</span> Accountability <span>&#8226;</span> Service</div>
+  <div class="banner">
     <div class="l1">ONE TEAM. ONE STANDARD. ONE MISSION.</div>
     <div class="l2">Protecting Today. Enabling Tomorrow.</div>
-  </footer>
+  </div>
 </div>
 '''
 
@@ -187,7 +161,7 @@ standalone_html = f'''<!doctype html>
 <html><head><meta charset="utf-8">
 <style>
 * {{ margin:0; padding:0; box-sizing:border-box; }}
-body {{ background:{FIELD_WHITE}; padding:0 48px; }}
+body {{ background:{FIELD_WHITE}; }}
 {inner_style}
 </style>
 </head>
@@ -199,13 +173,27 @@ with open(os.path.join(HERE, "valletta_culture_slide.html"),"w") as f:
 artifact_html = f'''<title>Physical Security Force Culture</title>
 <style>
 * {{ margin:0; padding:0; box-sizing:border-box; }}
-body {{ background:{FIELD_WHITE}; padding-inline:48px; padding-block:0; }}
+body {{ background:{FIELD_WHITE}; padding-block:24px; padding-inline:16px; }}
+.scale-wrap {{ width:100%; max-width:{CANVAS_W}px; margin:0 auto; aspect-ratio:{CANVAS_W}/{CANVAS_H}; position:relative; }}
 {inner_style}
-@media (max-width:600px) {{ body {{ padding-inline:20px; }} .core-purpose,.values-band,.closing-banner {{ margin-left:-20px; margin-right:-20px; padding-left:20px; padding-right:20px; }} }}
+.page {{ position:absolute; left:0; top:0; transform-origin:top left; }}
 </style>
-{inner_body}'''
+<div class="scale-wrap" id="scaleWrap">{inner_body}</div>
+<script>
+(function(){{
+  var wrap = document.getElementById('scaleWrap');
+  var page = wrap.querySelector('.page');
+  function fit(){{
+    var w = wrap.getBoundingClientRect().width;
+    var s = w / {CANVAS_W};
+    page.style.transform = 'scale(' + s + ')';
+  }}
+  new ResizeObserver(fit).observe(wrap);
+  fit();
+}})();
+</script>'''
 
 with open(os.path.join(HERE, "valletta_culture_slide_artifact.html"),"w") as f:
     f.write(artifact_html)
 
-print("written")
+print("written", CANVAS_W, CANVAS_H)
