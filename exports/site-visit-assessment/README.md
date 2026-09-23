@@ -74,13 +74,30 @@ regression.
 | File | Format |
 |---|---|
 | `valletta_site_visit_assessment_whiskey.pdf` | Interactive fillable PDF, US Letter, 7 pages |
+| `valletta_site_visit_assessment_whiskey.docx` | Flattened native Word document, US Letter |
 | `sva_data.py` | Transcribed field names, options, current values, and the calc script (verified against the source) |
 | `generate_sva.py` | Builds the PDF via PyMuPDF — page content, section bands, and all 60 form widgets |
+| `build_docx.js` | Builds the flattened docx via the `docx` npm package |
 | `fonts/` | Static-weight Inter/Oswald instances used for the painted (non-field) text |
 
-No `.docx` for this one — AcroForm interactivity (dropdowns, a live
-calculated field) doesn't have a Word equivalent worth producing; a docx
-export would just be a flat, non-functional copy.
+## About the .docx version
+
+The PDF is the authoritative version of this document — it's the only format
+that keeps the assessment interactive (working rating dropdowns and the live
+`total_score` recalculation). AcroForm widgets don't have a Word equivalent,
+so the docx is a **flattened snapshot**: every visit field, question,
+current rating, and current comment is reproduced as static text, styled to
+match the PDF (black section bands, red question numbers, bordered rating
+and comment fields). Picking a different rating or editing a comment in Word
+won't recalculate the total score — that only happens in the PDF. Unrated
+questions ("Select...") show as an em dash rather than the literal
+placeholder text, since a blank/dash reads more naturally in a static
+document than a dropdown placeholder does.
+
+The docx was validated with `python-docx`: zip integrity, all 26 question
+numbers present in order, all 5 section headers, the visit-info fields, a
+sample of the entered comments, and the total score value all confirmed
+present and matching `sva_data.py`.
 
 ## Verification
 
