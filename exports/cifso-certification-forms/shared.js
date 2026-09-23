@@ -4,7 +4,7 @@ const {
   Document, Packer, Paragraph, TextRun, AlignmentType,
   ShadingType, BorderStyle, ImageRun, Header, Footer, PageNumber, PageBreak,
   convertInchesToTwip, TabStopType, Table, TableRow, TableCell, WidthType,
-  CheckBox, VerticalAlign,
+  CheckBox, VerticalAlign, XmlComponent, XmlAttributeComponent,
 } = require("docx");
 
 const HERE = __dirname;
@@ -44,6 +44,73 @@ function noBorderCell(children, widthPct) {
   });
 }
 
+// ============================================================
+// low-level w:sdt content-control primitives (dropdown list, date picker)
+// docx v9's public API only exposes CheckBox as a ready-made content
+// control; dropdown/date controls are built by hand from the same
+// w:sdt / w:sdtPr / w:sdtContent primitives CheckBox itself uses.
+// ============================================================
+class SimpleValEl extends XmlComponent {
+  constructor(tag, val) {
+    super(tag);
+    this.root.push(new XmlAttributeComponent({ "w:val": val }));
+  }
+}
+
+class SdtPr extends XmlComponent {
+  constructor(children) {
+    super("w:sdtPr");
+    children.forEach((c) => this.root.push(c));
+  }
+}
+
+class SdtContent extends XmlComponent {
+  constructor(children) {
+    super("w:sdtContent");
+    children.forEach((c) => this.root.push(c));
+  }
+}
+
+class Sdt extends XmlComponent {
+  constructor(propsChildren, contentChildren) {
+    super("w:sdt");
+    this.root.push(new SdtPr(propsChildren));
+    this.root.push(new SdtContent(contentChildren));
+  }
+}
+
+// real Word "date picker" content control
+function DatePickerControl(placeholder = "Click or tap to enter a date.") {
+  const dateEl = new XmlComponent("w:date");
+  dateEl.root.push(new SimpleValEl("w:dateFormat", "M/d/yyyy"));
+  dateEl.root.push(new SimpleValEl("w:lid", "en-US"));
+  dateEl.root.push(new SimpleValEl("w:storeMappedDataAs", "dateTime"));
+  dateEl.root.push(new SimpleValEl("w:calendar", "gregorian"));
+  return new Sdt(
+    [dateEl],
+    [new TextRun({ text: placeholder, font: F_BODY, size: 20, color: STEEL, italics: true })]
+  );
+}
+
+// real Word "dropdown list" content control
+function DropdownControl(options, placeholder = "Choose an item.") {
+  const listEl = new XmlComponent("w:dropDownList");
+  listEl.root.push((() => {
+    const li = new XmlComponent("w:listItem");
+    li.root.push(new XmlAttributeComponent({ "w:displayText": placeholder, "w:value": placeholder }));
+    return li;
+  })());
+  options.forEach((opt) => {
+    const li = new XmlComponent("w:listItem");
+    li.root.push(new XmlAttributeComponent({ "w:displayText": opt, "w:value": opt }));
+    listEl.root.push(li);
+  });
+  return new Sdt(
+    [listEl],
+    [new TextRun({ text: placeholder, font: F_BODY, size: 20, color: STEEL, italics: true })]
+  );
+}
+
 function docTitle(title, subtitle) {
   return [
     new Paragraph({ spacing: { before: 100, after: 40 }, children: [new TextRun({ text: title, font: F_HEAD, bold: true, size: 40, color: BLACK })] }),
@@ -69,45 +136,66 @@ function subHeading(text) {
   });
 }
 
-// full-width fillable field: red label, blank underlined line
-function fieldRow(label) {
+function labelRun(label) {
+  return new TextRun({ text: label.toUpperCase(), font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 });
+}
+
+// ---- field paragraph builders (label + fillable control), each usable standalone or inside a table cell ----
+function textFieldPara(label) {
   return new Paragraph({
     border: { bottom: { color: LINE_GRAY, space: 4, style: BorderStyle.SINGLE, size: 4 } },
     spacing: { before: 120, after: 60 },
-    children: [
-      new TextRun({ text: label.toUpperCase(), font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 }),
-      new TextRun({ text: " ".repeat(6), size: 15 }),
-    ],
+    children: [labelRun(label), new TextRun({ text: " ".repeat(6), size: 15 })],
   });
 }
 
-// two short fillable fields side by side (e.g. "Age" / "Gender")
-function fieldPairRow(label1, label2) {
-  const cell = (label) => noBorderCell([
-    new Paragraph({
-      border: { bottom: { color: LINE_GRAY, space: 4, style: BorderStyle.SINGLE, size: 4 } },
-      spacing: { before: 120, after: 60 },
-      children: [new TextRun({ text: label.toUpperCase(), font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 })],
-    }),
-  ], 50);
-  return new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    rows: [new TableRow({ children: [cell(label1), cell(label2)] })],
+function dateFieldPara(label) {
+  return new Paragraph({
+    border: { bottom: { color: LINE_GRAY, space: 4, style: BorderStyle.SINGLE, size: 4 } },
+    spacing: { before: 120, after: 60 },
+    children: [labelRun(label), new TextRun({ break: 1 }), DatePickerControl()],
   });
 }
 
-function fieldTripleRow(label1, label2, label3) {
-  const cell = (label) => noBorderCell([
-    new Paragraph({
-      border: { bottom: { color: LINE_GRAY, space: 4, style: BorderStyle.SINGLE, size: 4 } },
-      spacing: { before: 120, after: 60 },
-      children: [new TextRun({ text: label.toUpperCase(), font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 })],
-    }),
-  ], 33.33);
-  return new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    rows: [new TableRow({ children: [cell(label1), cell(label2), cell(label3)] })],
+function dropdownFieldPara(label, options) {
+  return new Paragraph({
+    border: { bottom: { color: LINE_GRAY, space: 4, style: BorderStyle.SINGLE, size: 4 } },
+    spacing: { before: 120, after: 60 },
+    children: [labelRun(label), new TextRun({ break: 1 }), DropdownControl(options)],
   });
+}
+
+// field-type spec helpers — plain string = text field; wrap with Dt()/Dd() for other control types
+function Dt(label) { return { kind: "date", label }; }
+function Dd(label, options) { return { kind: "dropdown", label, options }; }
+function normSpec(s) { return typeof s === "string" ? { kind: "text", label: s } : s; }
+function paraFor(spec) {
+  if (spec.kind === "date") return dateFieldPara(spec.label);
+  if (spec.kind === "dropdown") return dropdownFieldPara(spec.label, spec.options);
+  return textFieldPara(spec.label);
+}
+
+// full-width fillable field (string = text, or Dt()/Dd() for other control types)
+function fieldRow(spec) {
+  return paraFor(normSpec(spec));
+}
+
+function row(specs) {
+  const widthPct = 100 / specs.length;
+  const cells = specs.map((s) => noBorderCell([paraFor(normSpec(s))], widthPct));
+  return new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, rows: [new TableRow({ children: cells })] });
+}
+
+function fieldPairRow(a, b) { return row([a, b]); }
+function fieldTripleRow(a, b, c) { return row([a, b, c]); }
+
+// common reusable option sets
+const YES_NO = ["Yes", "No"];
+function yearsOptions(max = 20) {
+  const opts = ["Less than 1"];
+  for (let i = 1; i <= max; i++) opts.push(String(i));
+  opts.push(`${max}+`);
+  return opts;
 }
 
 // interactive checkbox content control + label text
@@ -141,7 +229,7 @@ function blankNoteBox(minLines = 4) {
         : { left: { color: LINE_GRAY, space: 4, style: BorderStyle.SINGLE, size: 4 }, right: { color: LINE_GRAY, space: 4, style: BorderStyle.SINGLE, size: 4 } },
       spacing: { before: i === 0 ? 120 : 0, after: i === minLines - 1 ? 200 : 0 },
       indent: { left: 80, right: 80 },
-      children: [new TextRun({ text: " ", size: 20 })],
+      children: [new TextRun({ text: " ", size: 20 })],
     }));
   }
   return paras;
@@ -216,6 +304,7 @@ module.exports = {
   BLACK, CHARCOAL, FIELD_WHITE, RED, STEEL, LINE_GRAY, WHITE, NOTE_TINT,
   F_HEAD, F_LABEL, F_BODY, CONTENT_W,
   pageBreak, docTitle, sectionHeading, subHeading, fieldRow, fieldPairRow, fieldTripleRow,
+  Dt, Dd, YES_NO, yearsOptions,
   checkboxItem, tintedBox, blankNoteBox, sigRow, bodyPara, buildDocument, writeDoc,
   Paragraph, TextRun, BorderStyle, ShadingType,
 };

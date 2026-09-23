@@ -29,20 +29,71 @@ field was never filled in before the document was exported to PDF and
 signed. That confirms the underlying documents are Word templates with
 form fields, not flat forms, which is what these `.docx` templates restore.
 
-## Field fidelity vs. interactivity trade-off
+## Field types: checkbox, dropdown, date picker, or plain text
 
-- **Checklist items that used a real checkbox glyph (☐/☒) in the source**
-  (e.g. "Physical Security Experience," "Demonstrated Leadership Ability,"
-  "Uniforms Issued") are rebuilt as genuine Word checkbox content controls
-  — click to check them in Word, no typing required.
-- **Everything else** (free-text fields, the unfilled dropdowns, the
-  unfilled date pickers) is rebuilt as a labeled, underlined blank line —
-  type directly on the line. True interactive Word dropdown/date-picker
-  content controls were not used for these, because the source PDFs only
-  preserve the *placeholder text* for unfilled dropdowns/date fields, not
-  the underlying option lists — fabricating option lists we can't verify
-  against the source risked introducing content that wasn't in the
-  original. A blank fillable line is the faithful choice.
+Every field in all four templates is one of four genuine Word content
+control types, chosen per field rather than applied uniformly:
+
+- **Checkbox** — every checklist item that used a real checkbox glyph
+  (☐/☒) in the source (e.g. "Physical Security Experience," "Uniforms
+  Issued") is a real Word checkbox content control. Click to check it.
+- **Dropdown list** — every field with a small, enumerable set of answers
+  is a real Word dropdown content control (click it, pick from the list):
+  every Yes/No field (employment requirements, appearance standard, FEMA
+  certification completion), Gender, Branch, Type of Service, Type of
+  Termination, and every "Years" / "Years of experience" field.
+- **Date picker** — every field asking for a date (dates of hire/
+  termination/completion/qualification, expiration dates, signature dates,
+  OJT start/end dates, etc.) is a real Word date-picker content control
+  (click the calendar icon in Word to pick a date).
+- **Plain fillable line** — open-ended fields with no bounded set of valid
+  answers (candidate name, location, school/agency name, certifier name,
+  scores, hours, narrative boxes) stay as a labeled, underlined blank line.
+
+### Why some fields use inferred option lists, and why some don't
+
+The four source PDFs only reveal a dropdown's real option list when that
+specific field happened to be left unfilled (it then shows Word's literal
+"Choose an item." placeholder instead of a chosen value). That directly
+confirmed only a handful of fields as dropdowns. Rather than restrict real
+dropdown/date controls to only those few evidenced fields, two things were
+applied consistently:
+
+1. **Dates.** Every "Date"-labeled field across all four documents is a
+   date-picker control — this is unambiguous regardless of which specific
+   control the original template happened to use for that one field.
+2. **Yes/No and other clearly bounded fields.** Fields whose filled-in
+   value in the source was obviously one of a small closed set (Yes/No;
+   Male/Female; a numeric years-of-experience count) were given a
+   reasonable, clearly-labeled dropdown option list. These option lists
+   (e.g. military branches, termination types, a 0–20+ years range) are
+   **reconstructed, not transcribed** — the source never revealed the
+   underlying list, since the field was already filled with one answer.
+   They're reasonable, standard choices for the category, not source data.
+
+**Left as plain text, deliberately:** open-ended fields with no true
+bounded answer set (school/agency names, certifier names, narrative boxes)
+were not forced into a dropdown just because the source showed
+"Choose an item." for one of them (Tactical Medical Instructor Course's
+School/Agency Name field) — inventing a fixed list of schools would be
+fabricating specific content, which this rebrand avoids. The **Medical
+Evaluation** section in the New Hire Employment Eligibility form was also
+kept as plain text rather than turned into Yes/No dropdowns — those
+answers (vision, hearing, psychological fitness standards) are
+compound/qualified statements, not simple Yes/No, and inventing fixed
+categories for a medical certification section risked misrepresenting the
+actual standard being certified against.
+
+## Confirmed empty
+
+All four templates were checked against every candidate and signer name
+that appeared in the four source PDFs (Larry Lyles, Ryan Freitas, John
+Scott, Harry Zimmerman, Joshua Gallagher, Michael Schuster, Otilio
+Miranda, Michael Selleck, Jason Johns, Kurt Wetzold, JB Nance, Kevin
+Cadiente) — none of those names appear anywhere in the templates' text or
+table content. Every dropdown defaults to "Choose an item." and every date
+picker defaults to "Click or tap to enter a date." (Word's own standard
+placeholders), and every checkbox defaults to unchecked.
 
 ## Structure
 
@@ -77,7 +128,7 @@ one form are preserved as-is:
 
 | File | Purpose |
 |---|---|
-| `shared.js` | Shared styling helpers (header/footer, section bands, field rows, checkbox items, signature rows) reused by all four builders |
+| `shared.js` | Shared styling helpers (header/footer, section bands, field rows, checkbox/dropdown/date-picker content controls, signature rows) reused by all four builders |
 | `employment_eligibility.js` | Builds the New Hire Employment Eligibility template |
 | `shift_supervisor.js` | Builds the Shift Supervisor Candidate template |
 | `site_manager.js` | Builds the Site Manager Candidate template |
@@ -86,11 +137,15 @@ one form are preserved as-is:
 
 ## Verification
 
-Each docx was validated with `python-docx`: zip integrity, every section
-heading and subheading present, table-based paired fields (e.g. Age/
-Gender, Pistol/Rifle scores) confirmed rendering correctly, checkbox
-content controls present in the underlying XML at the expected counts, and
-page size confirmed at 8.5"×11" for all four.
+Each docx was validated with `python-docx` plus a raw-XML check: zip
+integrity, every section heading and subheading present, table-based
+paired fields (e.g. Age/Gender, Pistol/Rifle scores) confirmed rendering
+correctly, and checkbox/dropdown/date content controls present in the
+underlying XML at exactly the counts expected from each document's field
+list (e.g. the Employment Eligibility form: 11 checkboxes, 19 dropdowns,
+15 date pickers). Page size confirmed at 8.5"×11" for all four. A sample
+dropdown and date control's raw XML was inspected directly to confirm it
+matches Word's native `w:sdt`/`w:dropDownList`/`w:date` structure.
 
 As with other native `.docx` deliverables in this repo, no LibreOffice
 preview was available in this environment to visually confirm rendering —
