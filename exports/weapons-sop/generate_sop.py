@@ -3,7 +3,7 @@ import os
 BLACK = "#0A0A0A"
 CHARCOAL = "#26282B"
 FIELD_WHITE = "#F5F5F3"
-RED = "#FF002B"
+COBALT = "#1B4FA0"
 STEEL = "#5B5F66"
 LINE_GRAY = "#D8D9DB"
 WHITE = "#FFFFFF"
@@ -12,13 +12,14 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 def b64(name):
     return open(os.path.join(HERE, name)).read().strip()
 
-LOGO_BLACK = b64("valletta-mark-black.png.b64")
-LOGO_WHITE = b64("valletta-mark-white.png.b64")
+# combined Valletta+SOC lockup carries its own black backdrop, so the same asset
+# works both in the running header and on the black cover (v2.0 co-branding directive)
+LOGO_COMBINED = b64("valletta-soc-lockup.png.b64")
 FONTS_CSS = open(os.path.join(HERE, "..", "fonts_embed.css")).read()
 
 def header():
     return f'''<div class="doc-header">
-      <img src="data:image/png;base64,{LOGO_BLACK}" alt="Valletta Industries"/>
+      <img src="data:image/png;base64,{LOGO_COMBINED}" alt="Valletta Industries / SOC"/>
       <div class="doc-tag">SOP &ndash; Firearms Loading and Unloading</div>
     </div>'''
 
@@ -57,7 +58,7 @@ BLOCKS = []
 
 COVER_HTML = sheet(f'''
   <div class="cover-tick tl"></div><div class="cover-tick br"></div>
-  <img class="cover-logo" src="data:image/png;base64,{LOGO_WHITE}" alt="Valletta Industries"/>
+  <img class="cover-logo" src="data:image/png;base64,{LOGO_COMBINED}" alt="Valletta Industries / SOC"/>
   <div class="cover-eyebrow">Standard Operating Procedure</div>
   <div class="cover-title">Firearms Loading<br/>and Unloading</div>
   <div class="cover-meta-box">
@@ -244,31 +245,31 @@ MEASURE_CSS = f'''
 body {{ background:{FIELD_WHITE}; }}
 .probe {{ width:700px; font-family:'Inter',sans-serif; color:{CHARCOAL}; position:absolute; left:0; top:0; }}
 .sec-title {{ font-family:'Oswald'; font-weight:700; font-size:15.5px; letter-spacing:0.3px; text-transform:uppercase;
-  color:{BLACK}; margin:18px 0 10px; padding-bottom:6px; border-bottom:1.5px solid {RED}; }}
-.sec-num {{ color:{RED}; }}
+  color:{BLACK}; margin:18px 0 10px; padding-bottom:6px; border-bottom:1.5px solid {COBALT}; }}
+.sec-num {{ color:{COBALT}; }}
 .sec-title-plain {{ font-family:'Oswald'; font-weight:700; font-size:14.5px; letter-spacing:0.2px; text-transform:uppercase;
-  color:{BLACK}; margin:6px 0 14px; padding-bottom:6px; border-bottom:1.5px solid {RED}; }}
+  color:{BLACK}; margin:6px 0 14px; padding-bottom:6px; border-bottom:1.5px solid {COBALT}; }}
 .h2-sub {{ font-family:'Inter'; font-weight:700; font-size:12px; letter-spacing:0.6px; color:{BLACK}; text-transform:uppercase; margin:12px 0 6px; }}
 .ol-lvl1, .ol-lvl2 {{ font-size:10.7px; line-height:1.46; margin-bottom:6px; color:{CHARCOAL}; }}
 .ol-lvl1 {{ padding-left:4px; }}
 .ol-lvl2 {{ padding-left:30px; }}
 .ol-bold > .ol-text {{ font-weight:700; color:{BLACK}; }}
-.ol-label {{ color:{RED}; font-weight:700; display:inline-block; min-width:34px; }}
-.note-box {{ border-left:2px solid {RED}; background:#EFEFEC; padding:8px 12px; margin:10px 0; }}
-.note-tag {{ display:block; font-family:'Inter'; font-weight:700; font-size:9px; letter-spacing:1.2px; color:{RED}; text-transform:uppercase; margin-bottom:3px; }}
+.ol-label {{ color:{COBALT}; font-weight:700; display:inline-block; min-width:34px; }}
+.note-box {{ border-left:2px solid {COBALT}; background:#EFEFEC; padding:8px 12px; margin:10px 0; }}
+.note-tag {{ display:block; font-family:'Inter'; font-weight:700; font-size:9px; letter-spacing:1.2px; color:{COBALT}; text-transform:uppercase; margin-bottom:3px; }}
 .note-line {{ font-size:10.5px; line-height:1.42; color:{CHARCOAL}; }}
 .field-row {{ display:flex; align-items:flex-end; margin-bottom:9px; font-size:10.5px; }}
-.field-label {{ flex:none; font-weight:700; color:{RED}; text-transform:uppercase; letter-spacing:0.4px; font-size:9px; width:150px; }}
+.field-label {{ flex:none; font-weight:700; color:{COBALT}; text-transform:uppercase; letter-spacing:0.4px; font-size:9px; width:150px; }}
 .field-line {{ flex:1; border-bottom:1px solid {LINE_GRAY}; padding-bottom:2px; min-height:13px; color:{CHARCOAL}; }}
 .ack-label {{ font-family:'Inter'; font-weight:700; font-size:11.5px; letter-spacing:0.4px; color:{BLACK}; text-transform:uppercase; margin:12px 0 6px; }}
 .body-p {{ font-size:10.7px; line-height:1.48; margin-bottom:8px; color:{CHARCOAL}; }}
 .ack-list {{ list-style:none; margin:6px 0 10px; }}
 .ack-list li {{ position:relative; padding-left:15px; font-size:10.5px; line-height:1.48; margin-bottom:5px; color:{CHARCOAL}; }}
-.ack-list li::before {{ content:''; position:absolute; left:0; top:5px; width:6px; height:6px; background:{RED}; }}
+.ack-list li::before {{ content:''; position:absolute; left:0; top:5px; width:6px; height:6px; background:{COBALT}; }}
 .sig-row {{ display:flex; align-items:flex-end; margin-bottom:14px; margin-top:8px; font-size:10.5px; }}
 .sig-label {{ flex:none; font-weight:600; color:{CHARCOAL}; width:190px; }}
 .sig-line {{ flex:1; border-bottom:1px solid {LINE_GRAY}; min-height:13px; }}
-.cover-meta-box .field-label {{ color:{RED}; }}
+.cover-meta-box .field-label {{ color:{COBALT}; }}
 '''
 MEASURE_HTML = f'''<!doctype html><html><head><meta charset="utf-8"><style>{MEASURE_CSS}</style></head>
 <body>{"".join(f'<div class="probe" id="probe-{i}">{html_}</div>' for i, (name, html_) in enumerate(BLOCKS))}</body></html>'''
@@ -315,53 +316,53 @@ body {{ background:#CBCCCA; counter-reset:pagenum; }}
 .sheet .pagenum::before {{ content:" \\2013  Page " counter(pagenum) " of {len(PAGES)}"; }}
 
 .doc-header {{ display:flex; align-items:center; justify-content:space-between; padding-bottom:12px;
-  border-bottom:2px solid {RED}; margin-bottom:20px; }}
-.doc-header img {{ height:30px; width:auto; display:block; }}
+  border-bottom:2px solid {COBALT}; margin-bottom:20px; }}
+.doc-header img {{ height:46px; width:auto; display:block; }}
 .doc-header .doc-tag {{ font-family:'Inter'; font-weight:700; font-size:9.5px; letter-spacing:1.4px; color:{STEEL}; text-transform:uppercase; }}
 .doc-footer {{ position:absolute; left:0; right:0; bottom:26px; text-align:center; font-family:'Inter';
   font-weight:600; font-size:9px; letter-spacing:0.6px; color:{STEEL}; }}
 
 .sec-title {{ font-family:'Oswald'; font-weight:700; font-size:15.5px; letter-spacing:0.3px; text-transform:uppercase;
-  color:{BLACK}; margin:18px 0 10px; padding-bottom:6px; border-bottom:1.5px solid {RED}; }}
-.sec-num {{ color:{RED}; }}
+  color:{BLACK}; margin:18px 0 10px; padding-bottom:6px; border-bottom:1.5px solid {COBALT}; }}
+.sec-num {{ color:{COBALT}; }}
 .sec-title-plain {{ font-family:'Oswald'; font-weight:700; font-size:14.5px; letter-spacing:0.2px; text-transform:uppercase;
-  color:{BLACK}; margin:6px 0 14px; padding-bottom:6px; border-bottom:1.5px solid {RED}; }}
+  color:{BLACK}; margin:6px 0 14px; padding-bottom:6px; border-bottom:1.5px solid {COBALT}; }}
 .h2-sub {{ font-family:'Inter'; font-weight:700; font-size:12px; letter-spacing:0.6px; color:{BLACK}; text-transform:uppercase; margin:12px 0 6px; }}
 
 .ol-lvl1, .ol-lvl2 {{ font-size:10.7px; line-height:1.46; margin-bottom:6px; color:{CHARCOAL}; }}
 .ol-lvl1 {{ padding-left:4px; }}
 .ol-lvl2 {{ padding-left:30px; }}
 .ol-bold > .ol-text {{ font-weight:700; color:{BLACK}; }}
-.ol-label {{ color:{RED}; font-weight:700; display:inline-block; min-width:34px; }}
+.ol-label {{ color:{COBALT}; font-weight:700; display:inline-block; min-width:34px; }}
 
-.note-box {{ border-left:2px solid {RED}; background:#EFEFEC; padding:8px 12px; margin:10px 0; }}
-.note-tag {{ display:block; font-family:'Inter'; font-weight:700; font-size:9px; letter-spacing:1.2px; color:{RED}; text-transform:uppercase; margin-bottom:3px; }}
+.note-box {{ border-left:2px solid {COBALT}; background:#EFEFEC; padding:8px 12px; margin:10px 0; }}
+.note-tag {{ display:block; font-family:'Inter'; font-weight:700; font-size:9px; letter-spacing:1.2px; color:{COBALT}; text-transform:uppercase; margin-bottom:3px; }}
 .note-line {{ font-size:10.5px; line-height:1.42; color:{CHARCOAL}; }}
 
 .field-row {{ display:flex; align-items:flex-end; margin-bottom:9px; font-size:10.5px; }}
-.field-label {{ flex:none; font-weight:700; color:{RED}; text-transform:uppercase; letter-spacing:0.4px; font-size:9px; width:150px; }}
+.field-label {{ flex:none; font-weight:700; color:{COBALT}; text-transform:uppercase; letter-spacing:0.4px; font-size:9px; width:150px; }}
 .field-line {{ flex:1; border-bottom:1px solid {LINE_GRAY}; padding-bottom:2px; min-height:13px; color:{CHARCOAL}; }}
 
 .ack-label {{ font-family:'Inter'; font-weight:700; font-size:11.5px; letter-spacing:0.4px; color:{BLACK}; text-transform:uppercase; margin:12px 0 6px; }}
 .body-p {{ font-size:10.7px; line-height:1.48; margin-bottom:8px; color:{CHARCOAL}; }}
 .ack-list {{ list-style:none; margin:6px 0 10px; }}
 .ack-list li {{ position:relative; padding-left:15px; font-size:10.5px; line-height:1.48; margin-bottom:5px; color:{CHARCOAL}; }}
-.ack-list li::before {{ content:''; position:absolute; left:0; top:5px; width:6px; height:6px; background:{RED}; }}
+.ack-list li::before {{ content:''; position:absolute; left:0; top:5px; width:6px; height:6px; background:{COBALT}; }}
 .sig-row {{ display:flex; align-items:flex-end; margin-bottom:14px; margin-top:8px; font-size:10.5px; }}
 .sig-label {{ flex:none; font-weight:600; color:{CHARCOAL}; width:190px; }}
 .sig-line {{ flex:1; border-bottom:1px solid {LINE_GRAY}; min-height:13px; }}
 
 .cover {{ background:{BLACK}; display:flex; flex-direction:column; align-items:center; justify-content:center;
   text-align:center; padding:0 90px; }}
-.cover-tick {{ position:absolute; width:26px; height:26px; border-color:{RED}; border-style:solid; }}
+.cover-tick {{ position:absolute; width:26px; height:26px; border-color:{COBALT}; border-style:solid; }}
 .cover-tick.tl {{ left:40px; top:40px; border-width:3px 0 0 3px; }}
 .cover-tick.br {{ right:40px; bottom:40px; border-width:0 3px 3px 0; }}
-.cover-logo {{ height:64px; width:auto; margin-bottom:44px; }}
-.cover-eyebrow {{ font-family:'Inter'; font-weight:700; font-size:13px; letter-spacing:3px; color:{RED}; text-transform:uppercase; margin-bottom:14px; }}
+.cover-logo {{ height:110px; width:auto; margin-bottom:36px; }}
+.cover-eyebrow {{ font-family:'Inter'; font-weight:700; font-size:13px; letter-spacing:3px; color:{COBALT}; text-transform:uppercase; margin-bottom:14px; }}
 .cover-title {{ font-family:'Oswald'; font-weight:700; font-size:38px; line-height:1.2; letter-spacing:0.3px;
   text-transform:uppercase; color:{WHITE}; }}
 .cover-meta-box {{ margin-top:44px; width:100%; max-width:420px; text-align:left; }}
-.cover-meta-box .field-label {{ color:{RED}; width:170px; }}
+.cover-meta-box .field-label {{ color:{COBALT}; width:170px; }}
 .cover-meta-box .field-line {{ border-bottom:1px solid #4A4B4E; color:{WHITE}; }}
 '''
 

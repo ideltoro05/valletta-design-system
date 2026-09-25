@@ -9,11 +9,28 @@ from the source.
 
 The source header carried a combined "Valletta + SOC" lockup image — the
 mid-rebrand co-branding visible across this project's source material,
-confirming this is a branding change, not a content change. This version
-uses the plain Valletta mark throughout (white on the black cover, black in
-the running header), matching every other fully-rebranded document in this
-repo. No text was reworded; "SOC" only ever appeared as part of that logo
-image, not in the body copy.
+confirming this is a branding change, not a content change. No text was
+reworded; "SOC" only ever appeared as part of that logo image, not in the
+body copy.
+
+**2026-09-25 update (design system v2.0, per Sam's directive):** recolored
+from Valletta Red to Valletta Cobalt (`#1B4FA0`), and switched from the
+Valletta-only mark back to the combined Valletta + SOC lockup — co-branding
+is standard again for this document package, reversing the Valletta-only
+treatment this file used right after the initial rebrand. The combined
+lockup carries its own black backdrop, so the same asset is used in both
+the running header and on the black cover (previously two different mark
+files, black-on-white and white-on-black). No content changed — verified
+identical section/paragraph counts before and after. See
+`../../COBALT_REBRAND_PLAN.md` for the full package this is part of.
+Also confirmed against the source uploaded 2026-09-25
+(`Weapons Loading_Unloading_Ammunition_Policy.docx`): word-for-word the
+same content as this document (checked Section 1.1) — Sam's "Weapons and
+Ammunition Policy" list item and this SOP are the same document, just
+under a fuller title in the source header
+("Weapons and Ammunition Loading and Unloading Policy" stacked with
+"SOP – Firearms Loading and Unloading"). Title change pending confirmation
+from Sam — not applied yet.
 
 ## Numbering reconstruction
 

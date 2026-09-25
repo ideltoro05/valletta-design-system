@@ -11,7 +11,7 @@ const img = (name) => fs.readFileSync(path.join(HERE, name));
 
 const BLACK = "0A0A0A";
 const CHARCOAL = "26282B";
-const RED = "FF002B";
+const COBALT = "1B4FA0";
 const STEEL = "5B5F66";
 const LINE_GRAY = "D8D9DB";
 const WHITE = "FFFFFF";
@@ -27,7 +27,7 @@ const CONTENT_W = PAGE_W - 2 * MARGIN;
 function secTitle(num, title) {
   return new Paragraph({
     spacing: { before: 260, after: 140 },
-    border: { bottom: { color: RED, space: 4, style: BorderStyle.SINGLE, size: 10 } },
+    border: { bottom: { color: COBALT, space: 4, style: BorderStyle.SINGLE, size: 10 } },
     children: [new TextRun({ text: `${num}.  ${title.toUpperCase()}`, font: F_HEAD, bold: true, size: 25, color: BLACK })],
   });
 }
@@ -35,7 +35,7 @@ function secTitle(num, title) {
 function plainTitle(title) {
   return new Paragraph({
     spacing: { before: 260, after: 140 },
-    border: { bottom: { color: RED, space: 4, style: BorderStyle.SINGLE, size: 10 } },
+    border: { bottom: { color: COBALT, space: 4, style: BorderStyle.SINGLE, size: 10 } },
     children: [new TextRun({ text: title.toUpperCase(), font: F_HEAD, bold: true, size: 23, color: BLACK })],
   });
 }
@@ -46,7 +46,7 @@ function item(label, text, level = 1, bold = false) {
     indent: { left: IND[level] },
     spacing: { after: 90, line: 255 },
     children: [
-      new TextRun({ text: label + "  ", font: F_BODY, bold: true, size: 20, color: RED }),
+      new TextRun({ text: label + "  ", font: F_BODY, bold: true, size: 20, color: COBALT }),
       new TextRun({ text, font: F_BODY, size: 20, bold, color: bold ? BLACK : CHARCOAL }),
     ],
   });
@@ -56,14 +56,14 @@ function note(tag, lines) {
   const paras = [];
   paras.push(new Paragraph({
     shading: { type: ShadingType.CLEAR, color: "auto", fill: "EFEFEC" },
-    border: { left: { color: RED, space: 10, style: BorderStyle.SINGLE, size: 16 } },
+    border: { left: { color: COBALT, space: 10, style: BorderStyle.SINGLE, size: 16 } },
     spacing: { before: 90, after: 20 },
-    children: [new TextRun({ text: tag, font: F_LABEL, bold: true, size: 14, color: RED, characterSpacing: 6 })],
+    children: [new TextRun({ text: tag, font: F_LABEL, bold: true, size: 14, color: COBALT, characterSpacing: 6 })],
   }));
   lines.forEach((l, i) => {
     paras.push(new Paragraph({
       shading: { type: ShadingType.CLEAR, color: "auto", fill: "EFEFEC" },
-      border: { left: { color: RED, space: 10, style: BorderStyle.SINGLE, size: 16 } },
+      border: { left: { color: COBALT, space: 10, style: BorderStyle.SINGLE, size: 16 } },
       spacing: { after: i === lines.length - 1 ? 90 : 20 },
       children: [new TextRun({ text: l, font: F_BODY, size: 19, color: CHARCOAL })],
     }));
@@ -77,7 +77,7 @@ function fieldRow(label, value) {
     border: { bottom: { color: LINE_GRAY, space: 2, style: BorderStyle.SINGLE, size: 4 } },
     spacing: { before: 60, after: 100 },
     children: [
-      new TextRun({ text: label.toUpperCase() + "\t", font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 }),
+      new TextRun({ text: label.toUpperCase() + "\t", font: F_LABEL, bold: true, size: 15, color: COBALT, characterSpacing: 3 }),
       new TextRun({ text: value || "", font: F_BODY, size: 20, color: CHARCOAL }),
     ],
   });
@@ -107,14 +107,16 @@ function bodyPara(text) {
 function pageBreak() { return new Paragraph({ children: [new PageBreak()] }); }
 
 // ---- header/footer ----
-const logoBuf = img("valletta-mark-black.png");
+// combined Valletta+SOC lockup is 694x533 (near-square), not the wide mark-only
+// banner used before v2.0 — sized to preserve its aspect ratio
+const logoBuf = img("valletta-soc-lockup.png");
 function makeHeader() {
   return new Header({
     children: [new Paragraph({
       tabStops: [{ type: TabStopType.RIGHT, position: CONTENT_W }],
-      border: { bottom: { color: RED, space: 8, style: BorderStyle.SINGLE, size: 16 } },
+      border: { bottom: { color: COBALT, space: 8, style: BorderStyle.SINGLE, size: 16 } },
       children: [
-        new ImageRun({ type: "png", data: logoBuf, transformation: { width: 150, height: 30 } }),
+        new ImageRun({ type: "png", data: logoBuf, transformation: { width: 110, height: 85 } }),
         new TextRun({ text: "\t" }),
         new TextRun({ text: "SOP – FIREARMS LOADING AND UNLOADING", font: F_LABEL, bold: true, size: 15, color: STEEL, characterSpacing: 8 }),
       ],
@@ -143,9 +145,9 @@ const content = [];
 // ---- cover ----
 content.push(
   new Paragraph({ spacing: { before: 2400 }, alignment: AlignmentType.CENTER,
-    children: [new ImageRun({ type: "png", data: img("valletta-mark-white.png"), transformation: { width: 300, height: 60 } })] }),
+    children: [new ImageRun({ type: "png", data: img("valletta-soc-lockup.png"), transformation: { width: 220, height: 169 } })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 400 },
-    children: [new TextRun({ text: "STANDARD OPERATING PROCEDURE", font: F_LABEL, bold: true, size: 19, color: RED, characterSpacing: 16 })] }),
+    children: [new TextRun({ text: "STANDARD OPERATING PROCEDURE", font: F_LABEL, bold: true, size: 19, color: COBALT, characterSpacing: 16 })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 220 },
     children: [new TextRun({ text: "FIREARMS LOADING", font: F_HEAD, bold: true, size: 46, color: WHITE })] }),
   new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 60 },
@@ -155,25 +157,25 @@ content.push(
     tabStops: [{ type: TabStopType.LEFT, position: 4500 }],
     border: { bottom: { color: "4A4B4E", space: 2, style: BorderStyle.SINGLE, size: 4 } },
     spacing: { after: 160 },
-    children: [new TextRun({ text: "DOCUMENT NUMBER\t", font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 }), new TextRun({ text: "", font: F_BODY, size: 20, color: WHITE })],
+    children: [new TextRun({ text: "DOCUMENT NUMBER\t", font: F_LABEL, bold: true, size: 15, color: COBALT, characterSpacing: 3 }), new TextRun({ text: "", font: F_BODY, size: 20, color: WHITE })],
   }),
   new Paragraph({
     tabStops: [{ type: TabStopType.LEFT, position: 4500 }],
     border: { bottom: { color: "4A4B4E", space: 2, style: BorderStyle.SINGLE, size: 4 } },
     spacing: { after: 160 },
-    children: [new TextRun({ text: "EFFECTIVE DATE\t", font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 }), new TextRun({ text: "", font: F_BODY, size: 20, color: WHITE })],
+    children: [new TextRun({ text: "EFFECTIVE DATE\t", font: F_LABEL, bold: true, size: 15, color: COBALT, characterSpacing: 3 }), new TextRun({ text: "", font: F_BODY, size: 20, color: WHITE })],
   }),
   new Paragraph({
     tabStops: [{ type: TabStopType.LEFT, position: 4500 }],
     border: { bottom: { color: "4A4B4E", space: 2, style: BorderStyle.SINGLE, size: 4 } },
     spacing: { after: 160 },
-    children: [new TextRun({ text: "REVISION\t", font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 }), new TextRun({ text: "1.0", font: F_BODY, size: 20, color: WHITE })],
+    children: [new TextRun({ text: "REVISION\t", font: F_LABEL, bold: true, size: 15, color: COBALT, characterSpacing: 3 }), new TextRun({ text: "1.0", font: F_BODY, size: 20, color: WHITE })],
   }),
   new Paragraph({
     tabStops: [{ type: TabStopType.LEFT, position: 4500 }],
     border: { bottom: { color: "4A4B4E", space: 2, style: BorderStyle.SINGLE, size: 4 } },
     spacing: { after: 160 },
-    children: [new TextRun({ text: "APPROVED BY\t", font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 }), new TextRun({ text: "", font: F_BODY, size: 20, color: WHITE })],
+    children: [new TextRun({ text: "APPROVED BY\t", font: F_LABEL, bold: true, size: 15, color: COBALT, characterSpacing: 3 }), new TextRun({ text: "", font: F_BODY, size: 20, color: WHITE })],
   }),
   pageBreak(),
 );
@@ -352,7 +354,7 @@ const doc = new Document({
       levels: [{
         level: 0, format: LevelFormat.BULLET, text: "■",
         alignment: AlignmentType.LEFT,
-        style: { paragraph: { indent: { left: 360, hanging: 220 } }, run: { color: RED, font: F_BODY, size: 16 } },
+        style: { paragraph: { indent: { left: 360, hanging: 220 } }, run: { color: COBALT, font: F_BODY, size: 16 } },
       }],
     }],
   },
