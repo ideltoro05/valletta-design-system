@@ -54,13 +54,16 @@ reference, not treated as one of the 12 deliverables unless Sam says otherwise.
 ## Sequencing, given the Sept 29 internal target
 
 1. **Done:** design system updated; Drive folder connected and triaged.
-2. **Recolor pass first** (#1, #2, #3, #4, #7, #11) — mechanical, fastest wins, banks
-   progress early.
-3. **#10 (Incident Report Log)** — recolor + swap in the updated reporting-period data
-   from `Mark v2`.
-4. **New builds next** — #6 (PFT Policy) and #12 (Incident Event Form), since these
+2. **Done, 2026-09-25 — pure recolor pass** (#1, #2, #3, #4, #7): cobalt + combined
+   lockup applied, zero content changes, verified. Delivered as docx (their native
+   format — CIFSO forms were already docx-only; #7's source, both the original and
+   the 2026-09-25 upload, is docx).
+3. **Next — #10 and #11** (Incident Report Log, Weekly Activity Report): recolor
+   *plus* swap in the updated content from the `Mark v1`/`Mark v2` files (not pure
+   recolors, since the data changed too).
+4. **Then — new builds**: #6 (PFT Policy) and #12 (Incident Event Form), since these
    need full content structuring and, for #12, real interactive form controls.
-5. **#5** — recolor + relogo the Site Visit Assessment (interactive PDF + docx).
+5. **Then — #5**: recolor + relogo the Site Visit Assessment (interactive PDF + docx).
 
 ## Open questions for Sam / Israel
 
