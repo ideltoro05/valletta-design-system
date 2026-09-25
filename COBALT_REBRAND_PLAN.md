@@ -1,10 +1,11 @@
 # Cobalt Rebrand — Government Package Plan
 
-**Context:** Email from Sam, 2026-09-25. Government client submission due **Sunday,
-October 4**. Internal target: **Close of business, Tuesday, September 29** (built-in
-review/adjustment margin before submission).
+**Context:** Email from Sam, 2026-09-25. Google Drive folder ["Sept 25"](https://drive.google.com/drive/folders/1vXIfFAK0OpeznvmYFyqV6jM7GkcB7IqD)
+connected 2026-09-25 (14 files). Government client submission due **Sunday, October 4**.
+Internal target: **Close of business, Tuesday, September 29** (built-in review/
+adjustment margin before submission).
 
-**Design directive (now in `DESIGN_SYSTEM.md` v2.0 / `tokens.json` v2.0 — done):**
+**Design directive (in `DESIGN_SYSTEM.md` v2.0 / `tokens.json` v2.0 — done):**
 - Cobalt Blue (`#1B4FA0`) replaces Valletta Red as the primary document accent. Red is
   retired everywhere except inside the fixed Valletta shield logo mark itself (not
   being redesigned).
@@ -13,73 +14,62 @@ review/adjustment margin before submission).
   package, not the Valletta-only mark used on several documents built earlier in this
   project.
 - **Output format matches input format** — a PDF source gets a PDF back, a Word source
-  gets a Word file back. (Several earlier documents in this repo were delivered as both
-  PDF *and* docx regardless of source format; that's not the operating rule for this
-  package going forward.)
+  gets a Word file back.
 
-## Document inventory — Sam's 12 vs. what's already in this repo
+## Document inventory — Sam's 12, resolved against the Drive folder
 
-Sam's list numbering preserved. "Status" reflects the repo as of 2026-09-25, before any
-recolor/rebrand work on this new directive has started.
+Opening the actual files in the "Sept 25" Drive folder resolved 3 of the 4 open
+questions from the first pass of this plan (checked for tracked-changes/comments too —
+none of the re-uploaded files carry reviewer markup, they're clean final content).
 
-| # | Sam's document | Existing in repo | Status | Work needed |
+| # | Sam's document | Repo status | Drive folder resolution | Work needed |
 |---|---|---|---|---|
-| 1 | Contractor certificate for employment eligibility | `exports/cifso-certification-forms/valletta_new_hire_employment_eligibility.docx` | Built (black/red/Valletta-only) | Recolor + relogo |
-| 2 | Site Manager approval form | `exports/cifso-certification-forms/valletta_site_manager_candidate_qualifications.docx` | Built | Recolor + relogo |
-| 3 | Supervisor approval form | `exports/cifso-certification-forms/valletta_shift_supervisor_candidate_qualifications.docx` | Built | Recolor + relogo |
-| 4 | Site Trainer approval form | `exports/cifso-certification-forms/valletta_site_trainer_candidate_qualifications.docx` | Built | Recolor + relogo — **possible duplicate of #9, see below** |
-| 5 | Site visit assessment form (working dropdowns + fillable narrative) | `exports/site-visit-assessment/` — interactive PDF (AcroForm dropdowns + narrative fields) and a flattened docx | Built | Recolor + relogo — **possible duplicate of #8, see below** |
-| 6 | Physical Fitness Test (PFT) Assessment Policy | *(none found)* | **Not started** | New — need source document |
-| 7 | Weapons and Ammunition Policy | `exports/weapons-sop/` covers *Firearms Loading and Unloading* specifically, not a general ammunition policy | **Likely new** | Need source to confirm scope vs. the existing SOP |
-| 8 | Valletta Site Assessment | — | **Ambiguous** | Possible duplicate of #5 — confirm when uploaded |
-| 9 | Valletta Site Trainer Candidate Qualifications | `exports/cifso-certification-forms/valletta_site_trainer_candidate_qualifications.docx` | Built | **Possible duplicate of #4** — confirm when uploaded |
-| 10 | Valletta Incident Report Log | `exports/incident-log/valletta_incident_report_log.docx` | Built | Recolor + relogo — **possible overlap with #12, see below** |
-| 11 | Valletta Weekly Activity Report | `exports/weekly-activity-report/valletta_weekly_activity_report.docx` | Built | Recolor + relogo |
-| 12 | Incident Event Form | — | **Ambiguous** | Possible overlap with #10 (a single-event intake form vs. the running log/register) — confirm when uploaded |
+| 1 | Contractor certificate for employment eligibility | Built | Original source PDF re-uploaded (Lyles) | Recolor + relogo |
+| 2 | Site Manager approval form | Built | Original source PDF re-uploaded (Scott) | Recolor + relogo |
+| 3 | Supervisor approval form | Built | Original source PDF re-uploaded (Freitas) | Recolor + relogo |
+| 4 | Site Trainer approval form | Built | Original source PDF re-uploaded (Zimmerman) — **still likely = #9, no new evidence either way** | Recolor + relogo |
+| 5 | Site visit assessment form | Built | Original source PDF re-uploaded (Whiskey SVA) — **still likely = #8, no new evidence either way** | Recolor + relogo |
+| 6 | Physical Fitness Test (PFT) Assessment Policy | Not started | **`PFT v1.docx` supplied** — "PFT Policy and Administration Plan," HHS/ASPR Strategic National Stockpile Protective Services, Task Order 75A50326F80009 Appendix D | **New build**, source now in hand |
+| 7 | Weapons and Ammunition Policy | Existing SOP built | **`Weapons Loading_Unloading_Ammunition_Policy.docx` supplied — RESOLVED: word-for-word the same source content as the existing "Firearms Loading and Unloading SOP"** (Section 1.1 matches verbatim). The source document's own header stacks two titles: "SOP – Firearms Loading and Unloading" and "Weapons and Ammunition Loading and Unloading Policy" — worth using the fuller title on the rebrand. | Recolor + relogo, **not a new build** — confirm title with Sam |
+| 8 | Valletta Site Assessment | — | No separate source appeared; only the same Whiskey SVA PDF as #5 | Presumed = #5, confirm with Sam |
+| 9 | Valletta Site Trainer Candidate Qualifications | Built | `valletta_site_trainer_candidate_qualifications (1).docx` = our own prior output, re-uploaded clean (no markup) | Presumed = #4, confirm with Sam |
+| 10 | Valletta Incident Report Log | Built | `valletta_incident_report_log - Mark v2.docx` = updated content for a new reporting period (9/4–9/10/2026, real per-site data), no tracked changes/comments — clean final content | Recolor + relogo, **with this updated reporting-period data** |
+| 11 | Valletta Weekly Activity Report | Built | `valletta_weekly_activity_report - Mark v1.docx` = same pattern, clean updated content, no markup | Recolor + relogo, **with this updated content** |
+| 12 | Incident Event Form | — | **`Incident_Event_Form_Revised_v3.docx` supplied — RESOLVED: a genuinely different document from #10.** "Valletta Industries / SOC Incident Response Report," form F-003, a single-incident intake form with real Word dropdowns (Nature of Incident, Site/Facility) and date pickers — not a running log. | **New build**, source now in hand |
 
-**Bottom line:** 7 of the 12 already exist and only need a recolor + relogo pass (fast,
-mechanical, no new content decisions). 2 appear to be genuinely new documents needing a
-source upload (PFT Assessment Policy, Weapons and Ammunition Policy). 3 are possible
-duplicates/near-duplicates of documents already built (#4/#9, #5/#8, #10/#12) — flagged
-rather than assumed, since collapsing them wrong would mean missing a real deliverable.
+**Also in the folder, not one of the 12:** `Valletta_Teams_Background_Navy.png` — a
+Teams virtual-background asset in the new navy/cobalt direction. Noted as a brand
+reference, not treated as one of the 12 deliverables unless Sam says otherwise.
 
-## Recolor + relogo pass (the 7 already-built documents)
-
-Mechanical, low-risk, no content changes — same method used throughout this project:
-update each document's generator script (color constants, logo asset reference) and
-re-run it. Concretely, per document: swap the red hex constant to Cobalt Blue
-`#1B4FA0`, swap the Valletta-only logo reference to the combined
-`valletta-soc-lockup.png`, regenerate, re-verify (structural checks + visual QA as
-already established), redeliver in the source's original format only.
-
-## New documents (need Sam/the client to upload source)
-
-- **Physical Fitness Test (PFT) Assessment Policy**
-- **Weapons and Ammunition Policy**
-
-These get built fresh in the cobalt/co-branded system from the start — no legacy
-red/Valletta-only version to convert.
+**Bottom line, updated:**
+- **8 documents are a recolor + relogo pass** of content already built: #1, #2, #3, #4,
+  #5, #7 (now confirmed = the existing SOP), #10, #11 (#10 and #11 also carry updated
+  source content, not just a palette swap).
+- **2 are new builds** with source now in hand: #6 (PFT Policy) and #12 (Incident Event
+  Form, which needs real Word dropdown/date-picker content controls, similar to the
+  Site Visit Assessment).
+- **2 remain presumed duplicates** (#4=#9, #5=#8) — no new evidence surfaced either way;
+  worth a quick confirmation from Sam rather than assuming.
 
 ## Sequencing, given the Sept 29 internal target
 
-1. **Now:** design system updated (done, this pass).
-2. **As each document is uploaded:** confirm whether it's a recolor of an existing
-   build or new content, per the table above, then process it in its native format
-   (PDF in → PDF out, Word in → Word out).
-3. **Prioritize the 7 recolors first** where possible — they're the fastest wins and
-   bank progress early, leaving the two genuinely new policy documents (which need
-   source content read and structured from scratch) more runway before the 29th.
-4. **Flag, don't guess, on the three ambiguous pairs** (#4/#9, #5/#8, #10/#12) — when
-   each is uploaded, confirm with Sam/Israel whether it's the same document as one
-   already built or something distinct before spending build time on it.
+1. **Done:** design system updated; Drive folder connected and triaged.
+2. **Recolor pass first** (#1, #2, #3, #4, #7, #11) — mechanical, fastest wins, banks
+   progress early.
+3. **#10 (Incident Report Log)** — recolor + swap in the updated reporting-period data
+   from `Mark v2`.
+4. **New builds next** — #6 (PFT Policy) and #12 (Incident Event Form), since these
+   need full content structuring and, for #12, real interactive form controls.
+5. **#5** — recolor + relogo the Site Visit Assessment (interactive PDF + docx).
 
 ## Open questions for Sam / Israel
 
 1. Are #4 (Site Trainer approval form) and #9 (Valletta Site Trainer Candidate
-   Qualifications) the same document?
+   Qualifications) the same document? (Still unresolved — presumed yes.)
 2. Are #5 (Site visit assessment form) and #8 (Valletta Site Assessment) the same
-   document?
-3. Are #10 (Valletta Incident Report Log) and #12 (Incident Event Form) two different
-   documents (a running log vs. a single-incident intake form), or the same thing?
-4. Does "Weapons and Ammunition Policy" (#7) supersede/absorb the existing "Firearms
-   Loading and Unloading SOP," or is it a separate, broader policy document?
+   document? (Still unresolved — presumed yes.)
+3. ~~Are #10 and #12 the same thing?~~ **Resolved — two different documents**, both
+   confirmed in hand.
+4. ~~Does #7 supersede the existing SOP?~~ **Resolved — same content**, source in hand.
+   Confirm: should the rebrand use the fuller title "Weapons and Ammunition Loading
+   and Unloading Policy," or keep the shorter title used on the existing build?
