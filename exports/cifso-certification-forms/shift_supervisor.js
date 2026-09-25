@@ -1,7 +1,7 @@
 const {
   docTitle, sectionHeading, subHeading, fieldRow, fieldPairRow, fieldTripleRow,
   checkboxItem, tintedBox, blankNoteBox, sigRow, bodyPara, buildDocument, writeDoc,
-  Paragraph, TextRun, F_BODY, RED, Dt, Dd, YES_NO, yearsOptions,
+  Paragraph, TextRun, F_BODY, COBALT, Dt, Dd, YES_NO, yearsOptions,
 } = require("./shared");
 
 const DOC_TAG = "Shift Supervisor Candidate Qualifications";
@@ -53,9 +53,9 @@ content.push(new Paragraph({
   spacing: { after: 140, line: 270 },
   children: [
     new TextRun({ text: "The Contractor Certifies that the above-named Shift Supervisor Candidate meets or exceeds all qualifications and certifications as enumerated in the Statement of Work. Documents and certifications related to the above-named candidate are available for review upon request. The contractor requests approval for (print) ", font: F_BODY, size: 20, color: "26282B" }),
-    new TextRun({ text: "_______________________", font: F_BODY, size: 20, color: RED }),
+    new TextRun({ text: "_______________________", font: F_BODY, size: 20, color: COBALT }),
     new TextRun({ text: " to be appointed CIFSO Shift Supervisor on ", font: F_BODY, size: 20, color: "26282B" }),
-    new TextRun({ text: "____________", font: F_BODY, size: 20, color: RED }),
+    new TextRun({ text: "____________", font: F_BODY, size: 20, color: COBALT }),
   ],
 }));
 

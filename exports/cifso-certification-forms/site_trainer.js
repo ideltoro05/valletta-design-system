@@ -1,7 +1,7 @@
 const {
   docTitle, sectionHeading, subHeading, fieldRow, fieldPairRow, fieldTripleRow,
   checkboxItem, tintedBox, blankNoteBox, sigRow, bodyPara, buildDocument, writeDoc,
-  Paragraph, TextRun, F_BODY, RED, Dt, Dd, YES_NO, yearsOptions,
+  Paragraph, TextRun, F_BODY, COBALT, Dt, Dd, YES_NO, yearsOptions,
 } = require("./shared");
 
 const DOC_TAG = "Site Trainer Candidate Qualifications";
@@ -77,9 +77,9 @@ content.push(new Paragraph({
   spacing: { after: 100, line: 270 },
   children: [
     new TextRun({ text: "The contractor certifies the above-named candidate meets or exceeds all SOW required conditions enumerated in Section D – Contract Documents, Exhibits or Attachments; D.21. The contractor requests that ", font: F_BODY, size: 20, color: "26282B" }),
-    new TextRun({ text: "_______________________", font: F_BODY, size: 20, color: RED }),
+    new TextRun({ text: "_______________________", font: F_BODY, size: 20, color: COBALT }),
     new TextRun({ text: " be approved as a qualified CIFSO Site Trainer effective ", font: F_BODY, size: 20, color: "26282B" }),
-    new TextRun({ text: "____________", font: F_BODY, size: 20, color: RED }),
+    new TextRun({ text: "____________", font: F_BODY, size: 20, color: COBALT }),
   ],
 }));
 content.push(bodyPara("The contractor certifies that all certifications are located in the personnel file of the candidate at their respective site."));

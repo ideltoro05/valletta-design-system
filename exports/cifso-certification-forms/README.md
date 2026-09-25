@@ -4,6 +4,13 @@ Four blank, branded Word templates in the Valletta Industries design system
 (`../../DESIGN_SYSTEM.md`, `../../tokens.json`), built from four signed,
 filled-in example PDFs:
 
+**2026-09-25 update (design system v2.0, per Sam's directive):** recolored from
+Valletta Red to Valletta Cobalt (`#1B4FA0`) and switched from the Valletta-only mark
+to the combined Valletta + SOC lockup in the header. Every field, checklist item, and
+control (checkboxes, dropdowns, date pickers) is unchanged — verified identical field
+counts before/after the recolor. See `../../COBALT_REBRAND_PLAN.md` for the full
+package this is part of.
+
 | Source PDF | Template |
 |---|---|
 | `Contractor_Certification_Employment_Eligibility_-_CIFSO_CT_Lyles_Larry.pdf` | `valletta_new_hire_employment_eligibility.docx` |

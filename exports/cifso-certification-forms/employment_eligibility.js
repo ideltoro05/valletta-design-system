@@ -1,7 +1,7 @@
 const {
   docTitle, sectionHeading, subHeading, fieldRow, fieldPairRow, fieldTripleRow,
   checkboxItem, tintedBox, blankNoteBox, sigRow, bodyPara, buildDocument, writeDoc,
-  Paragraph, TextRun, F_BODY, RED, Dt, Dd, YES_NO,
+  Paragraph, TextRun, F_BODY, COBALT, Dt, Dd, YES_NO,
 } = require("./shared");
 
 const DOC_TAG = "New Hire Employment Eligibility";
@@ -101,9 +101,9 @@ content.push(new Paragraph({
   spacing: { after: 140, line: 270 },
   children: [
     new TextRun({ text: "The Contractor Certifies that the above-named New Hire Candidate meets or exceeds all conditions of employment as enumerated in the Statement of Work. We request approval for (type) ", font: F_BODY, size: 20, color: "26282B" }),
-    new TextRun({ text: "_______________________", font: F_BODY, size: 20, color: RED }),
+    new TextRun({ text: "_______________________", font: F_BODY, size: 20, color: COBALT }),
     new TextRun({ text: " to be placed into the working schedule as a fully certified CIFSO on ", font: F_BODY, size: 20, color: "26282B" }),
-    new TextRun({ text: "____________", font: F_BODY, size: 20, color: RED }),
+    new TextRun({ text: "____________", font: F_BODY, size: 20, color: COBALT }),
   ],
 }));
 

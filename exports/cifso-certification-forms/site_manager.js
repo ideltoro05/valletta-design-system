@@ -1,7 +1,7 @@
 const {
   docTitle, sectionHeading, subHeading, fieldRow, fieldPairRow, fieldTripleRow,
   checkboxItem, tintedBox, blankNoteBox, sigRow, bodyPara, buildDocument, writeDoc,
-  Paragraph, TextRun, F_BODY, RED, Dt, Dd, YES_NO, yearsOptions,
+  Paragraph, TextRun, F_BODY, COBALT, Dt, Dd, YES_NO, yearsOptions,
 } = require("./shared");
 
 const DOC_TAG = "Site Manager Candidate Qualifications";
@@ -49,11 +49,11 @@ content.push(new Paragraph({
   spacing: { after: 140, line: 270 },
   children: [
     new TextRun({ text: "The Contractor Certifies the above-named Site Manager Candidate meets or exceeds all qualifications and certifications as enumerated in the Statement of Work. We request approval for ", font: F_BODY, size: 20, color: "26282B" }),
-    new TextRun({ text: "_______________________", font: F_BODY, size: 20, color: RED }),
+    new TextRun({ text: "_______________________", font: F_BODY, size: 20, color: COBALT }),
     new TextRun({ text: " to be appointed CIFSO ", font: F_BODY, size: 20, color: "26282B" }),
-    new TextRun({ text: "_________", font: F_BODY, size: 20, color: RED }),
+    new TextRun({ text: "_________", font: F_BODY, size: 20, color: COBALT }),
     new TextRun({ text: " Site Manager on ", font: F_BODY, size: 20, color: "26282B" }),
-    new TextRun({ text: "____________", font: F_BODY, size: 20, color: RED }),
+    new TextRun({ text: "____________", font: F_BODY, size: 20, color: COBALT }),
   ],
 }));
 

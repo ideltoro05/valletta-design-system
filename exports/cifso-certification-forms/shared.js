@@ -13,7 +13,7 @@ const img = (name) => fs.readFileSync(path.join(HERE, name));
 const BLACK = "0A0A0A";
 const CHARCOAL = "26282B";
 const FIELD_WHITE = "F5F5F3";
-const RED = "FF002B";
+const COBALT = "1B4FA0";
 const STEEL = "5B5F66";
 const LINE_GRAY = "D8D9DB";
 const WHITE = "FFFFFF";
@@ -114,7 +114,7 @@ function DropdownControl(options, placeholder = "Choose an item.") {
 function docTitle(title, subtitle) {
   return [
     new Paragraph({ spacing: { before: 100, after: 40 }, children: [new TextRun({ text: title, font: F_HEAD, bold: true, size: 40, color: BLACK })] }),
-    new Paragraph({ border: { bottom: { color: RED, space: 4, style: BorderStyle.SINGLE, size: 18 } }, spacing: { after: 160 }, children: [new TextRun({ text: "", size: 2 })] }),
+    new Paragraph({ border: { bottom: { color: COBALT, space: 4, style: BorderStyle.SINGLE, size: 18 } }, spacing: { after: 160 }, children: [new TextRun({ text: "", size: 2 })] }),
     new Paragraph({ spacing: { after: 220 }, children: [new TextRun({ text: subtitle, font: F_BODY, size: 20, color: STEEL })] }),
   ];
 }
@@ -131,13 +131,13 @@ function sectionHeading(text) {
 function subHeading(text) {
   return new Paragraph({
     spacing: { before: 200, after: 120 },
-    border: { bottom: { color: RED, space: 4, style: BorderStyle.SINGLE, size: 10 } },
+    border: { bottom: { color: COBALT, space: 4, style: BorderStyle.SINGLE, size: 10 } },
     children: [new TextRun({ text: text.toUpperCase(), font: F_LABEL, bold: true, size: 18, color: BLACK })],
   });
 }
 
 function labelRun(label) {
-  return new TextRun({ text: label.toUpperCase(), font: F_LABEL, bold: true, size: 15, color: RED, characterSpacing: 3 });
+  return new TextRun({ text: label.toUpperCase(), font: F_LABEL, bold: true, size: 15, color: COBALT, characterSpacing: 3 });
 }
 
 // ---- field paragraph builders (label + fillable control), each usable standalone or inside a table cell ----
@@ -250,13 +250,15 @@ function bodyPara(text) {
 
 // ---- header/footer ----
 function makeHeader(docTag) {
-  const logoBuf = img("valletta-mark-black.png");
+  // combined Valletta+SOC lockup is 694x533 (near-square), not the wide mark-only
+  // banner this header used before v2.0 — sized to stay legible at header scale
+  const logoBuf = img("valletta-soc-lockup.png");
   return new Header({
     children: [new Paragraph({
       tabStops: [{ type: TabStopType.RIGHT, position: CONTENT_W }],
-      border: { bottom: { color: RED, space: 8, style: BorderStyle.SINGLE, size: 16 } },
+      border: { bottom: { color: COBALT, space: 8, style: BorderStyle.SINGLE, size: 16 } },
       children: [
-        new ImageRun({ type: "png", data: logoBuf, transformation: { width: 150, height: 30 } }),
+        new ImageRun({ type: "png", data: logoBuf, transformation: { width: 110, height: 85 } }),
         new TextRun({ text: "\t" }),
         new TextRun({ text: docTag.toUpperCase(), font: F_LABEL, bold: true, size: 14, color: STEEL, characterSpacing: 6 }),
       ],
@@ -301,7 +303,7 @@ function writeDoc(doc, outName) {
 }
 
 module.exports = {
-  BLACK, CHARCOAL, FIELD_WHITE, RED, STEEL, LINE_GRAY, WHITE, NOTE_TINT,
+  BLACK, CHARCOAL, FIELD_WHITE, COBALT, STEEL, LINE_GRAY, WHITE, NOTE_TINT,
   F_HEAD, F_LABEL, F_BODY, CONTENT_W,
   pageBreak, docTitle, sectionHeading, subHeading, fieldRow, fieldPairRow, fieldTripleRow,
   Dt, Dd, YES_NO, yearsOptions,
