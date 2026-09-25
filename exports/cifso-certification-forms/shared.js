@@ -24,7 +24,12 @@ const F_LABEL = "Arial";
 const F_BODY = "Calibri";
 
 const PAGE_W = 12240, PAGE_H = 15840;
-const MARGIN = convertInchesToTwip(0.85);
+// 1in margins (standard for a government-facing document); header/footer distance
+// tightened from the docx default (0.49in) so the taller combined-lockup header logo
+// (added in the v2.0 recolor) has clear room inside the top margin, not just the
+// pre-v2.0 default sized for a thin banner mark.
+const MARGIN = convertInchesToTwip(1.0);
+const HEADER_DISTANCE = convertInchesToTwip(0.35);
 const CONTENT_W = PAGE_W - 2 * MARGIN;
 
 function pageBreak() { return new Paragraph({ children: [new PageBreak()] }); }
@@ -258,7 +263,7 @@ function makeHeader(docTag) {
       tabStops: [{ type: TabStopType.RIGHT, position: CONTENT_W }],
       border: { bottom: { color: COBALT, space: 8, style: BorderStyle.SINGLE, size: 16 } },
       children: [
-        new ImageRun({ type: "png", data: logoBuf, transformation: { width: 110, height: 85 } }),
+        new ImageRun({ type: "png", data: logoBuf, transformation: { width: 63, height: 48 } }),
         new TextRun({ text: "\t" }),
         new TextRun({ text: docTag.toUpperCase(), font: F_LABEL, bold: true, size: 14, color: STEEL, characterSpacing: 6 }),
       ],
@@ -285,7 +290,10 @@ function buildDocument(docTag, content) {
   return new Document({
     sections: [{
       properties: {
-        page: { size: { width: PAGE_W, height: PAGE_H }, margin: { top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN } },
+        page: {
+          size: { width: PAGE_W, height: PAGE_H },
+          margin: { top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN, header: HEADER_DISTANCE, footer: HEADER_DISTANCE },
+        },
         titlePage: true,
       },
       headers: { default: makeHeader(docTag), first: emptyHeader() },
