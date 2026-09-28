@@ -1,0 +1,905 @@
+[
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "PHYSICAL FITNESS TEST (PFT)\nPOLICY AND ADMINISTRATION PLAN"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "HHS / ASPR Strategic National Stockpile Protective Services"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Task Order 75A50326F80009 | Appendix D"
+ },
+ {
+  "type": "table",
+  "idx": 0,
+  "rows": [
+   [
+    "Document Owner",
+    "National Training Manager (NTM)"
+   ],
+   [
+    "Applicability",
+    "Site Managers, Shift Supervisors, CIFSO Site Trainers, and CIFSO personnel"
+   ],
+   [
+    "Authority",
+    "Task Order 75A50326F80009, Appendix D - Physical Fitness Testing Requirements"
+   ],
+   [
+    "Approval",
+    "COR / Designee"
+   ],
+   [
+    "Status",
+    "Proposed PFT Plan - Government approval required before implementation"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "POLICY CONTROL: This policy implements the existing Government PFT requirement. It does not recommend or authorize a change to the PFT events, age/gender standards, minimum passing requirements, testing frequency, retest requirements, or removal provisions contained in Appendix D. If this policy conflicts with the Task Order/SOW or COR direction, the Government requirement controls."
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "1. PURPOSE"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Establish a standardized Valletta/SOC process for administering, scoring, documenting, retesting, and reporting the Government-required CIFSO Physical Fitness Test (PFT) across all contract sites."
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "2. POLICY"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Personnel covered by Appendix D must meet the applicable Government physical fitness standard as a condition of performing services under the contract. PFTs for record will be administered only by authorized personnel, conducted at the required frequency, scored against the Appendix D standards, and documented in the individual training record."
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "3. APPLICABILITY AND TESTING FREQUENCY"
+ },
+ {
+  "type": "table",
+  "idx": 1,
+  "rows": [
+   [
+    "Population",
+    "Frequency",
+    "Administration"
+   ],
+   [
+    "CIFSO",
+    "Semi-annually",
+    "CIFSO Site Trainer; Site Manager supports administration"
+   ],
+   [
+    "Shift Supervisor",
+    "Semi-annually",
+    "CIFSO Site Trainer; Site Manager supports administration"
+   ],
+   [
+    "Site Manager",
+    "Semi-annually",
+    "NTM and CIFSO Site Trainer during NTM semi-annual site visit; if NTM is unavailable, an MST member observes as required"
+   ],
+   [
+    "CIFSO Site Trainer",
+    "Annually",
+    "NTM, with assistance from the National Operations Manager, during the annual Site Trainer conference unless otherwise approved by the COR/designee"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "The PFT is in addition to the 40-hour semiannual sustainment training and must be conducted within one month of the semiannual training unless otherwise directed by the COR/designee.`"
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "4. AUTHORITY AND RESPONSIBILITIES"
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "National Training Manager (NTM): Owns the PFT program; schedules Site Manager and Site Trainer testing; maintains the approved PFT Plan; schedules required retests; oversees records, standardization, and reporting."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "CIFSO Site Trainer (CST): Authorized to administer PFTs for record; conducts standardized event briefs; scores events; documents results; reports failures and retest requirements to the NTM."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "Site Manager: Supports semiannual CIFSO and site logistics; participates in testing as required by Appendix D."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "National Operations Manager / MST: Supports or observes specified testing when required by Appendix D."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "Tested Personnel: Report prepared to test, comply with event instructions and safety requirements, and complete all required events."
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "5. REQUIRED PFT EVENTS AND PASSING STANDARD"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "The PFT consists of four required events. To pass, personnel must achieve at least the Minimum (60) standard in push-ups, sit-ups, and the 300-meter sprint for the applicable age/gender category, and successfully complete the 165-pound victim drag."
+ },
+ {
+  "type": "table",
+  "idx": 2,
+  "rows": [
+   [
+    "Event",
+    "Government Requirement"
+   ],
+   [
+    "Push-Ups",
+    "Two minutes; complete as many proper repetitions as possible."
+   ],
+   [
+    "Sit-Ups",
+    "Two minutes; complete as many proper repetitions as possible. An assistant may hold the ankles."
+   ],
+   [
+    "300-Meter Sprint",
+    "Complete 300 meters as quickly as possible within the applicable age/gender standard."
+   ],
+   [
+    "165-lb Victim Drag",
+    "Pass/Fail. Lift and drag the 165-lb dummy 25 meters stopping to rest. No time limitation is specified in Appendix D."
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "6. TEST ADMINISTRATION"
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "Prior to testing, the administrator will identify the test population, verify the applicable age/gender category, confirm the test site and required equipment, and provide the event sequence and standards."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "The administrator will brief, from the standard, before execution and apply the Appendix D standard consistently to all personnel."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "Testing will be stopped when an immediate safety concern requires cessation. Any interrupted or incomplete test will be documented and referred to the NTM for disposition consistent with contract requirements and COR direction."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "All four events will be recorded on the approved PFT score sheet. A for-record test is not complete until the administrator records the overall Pass/Fail result and signs the record."
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "7. FAILURE, RETEST, AND REMOVAL"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "A failure of the for-record PFT triggers the following contract-required process:"
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "The individual must retest on all PFT events within 30 days, as scheduled by the NTM."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "A second failed attempt completed within the 30-day requirement requires removal from the contract."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "For a Site Manager retest, the CST and NTM administer the retest; if the NTM is unavailable, an MST (or a named NTM proxy in unusual circumstances) member observes as required by Appendix D."
+ },
+ {
+  "type": "p",
+  "style": "List Bullet",
+  "text": "The NTM will ensure the initial failure, retest date, retest result, and final disposition are documented."
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "8. DOCUMENTATION AND RECORDS"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "At a minimum, the PFT record will capture: employee name, site, position, age/gender category used for scoring, test date, administrator, event results, overall result, retest due date when applicable, retest result, and final disposition. Records will be maintained with the individual's training documentation and made available for contract oversight as required."
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "9. INCENTIVE PROGRAM"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Appendix D requires an incentive program, approved by the COR/designee, recognizing superior PFT performance. Valletta/SOC will not alter the Government scoring tables or passing standards to implement the incentive program. Incentive criteria and recognition mechanisms will be submitted separately for COR/designee approval before use."
+ },
+ {
+  "type": "p",
+  "style": "Heading 1",
+  "text": "10. GOVERNMENT FITNESS STANDARDS"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "The following tables reproduce the Appendix D standards without changing the Government requirement. A blank sprint value in the source Appendix is shown below as “Not specified in Appendix D” rather than creating a new standard."
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Men - Age 20-29"
+ },
+ {
+  "type": "table",
+  "idx": 3,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">61",
+    ">54",
+    "Not specified in Appendix D",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "47-61",
+    "47-54",
+    "47-50 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "37-46",
+    "42-46",
+    "51-54 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "34-36",
+    "41",
+    "55-59 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "33",
+    "40",
+    "60 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Men - Age 30-39"
+ },
+ {
+  "type": "table",
+  "idx": 4,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">51",
+    ">50",
+    "Not specified in Appendix D",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "39-51",
+    "43-50",
+    "47-51 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "30-38",
+    "39-42",
+    "52-55 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "28-29",
+    "37-38",
+    "56-59 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "27",
+    "36",
+    "60 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Men - Age 40-49"
+ },
+ {
+  "type": "table",
+  "idx": 5,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">39",
+    ">46",
+    "Not specified in Appendix D",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "30-39",
+    "39-46",
+    "53-57 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "24-29",
+    "34-38",
+    "58-64 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "22-23",
+    "32-33",
+    "65-72 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "21",
+    "31",
+    "73 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Men - Age 50-59"
+ },
+ {
+  "type": "table",
+  "idx": 6,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">38",
+    ">42",
+    "<58 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "25-38",
+    "35-42",
+    "59-66 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "19-24",
+    "28-34",
+    "67-74 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "16-18",
+    "27",
+    "75-83 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "15",
+    "26",
+    "84 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Men - Age 60-69"
+ },
+ {
+  "type": "table",
+  "idx": 7,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">27",
+    ">38",
+    "Not specified in Appendix D",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "23-27",
+    "30-38",
+    "59-66 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "18-22",
+    "22-29",
+    "67-74 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "16-17",
+    "21",
+    "75-83 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "15",
+    "20",
+    "84 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Women - Age 20-29"
+ },
+ {
+  "type": "table",
+  "idx": 8,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">24",
+    ">50",
+    "Not specified in Appendix D",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "24",
+    "44-50",
+    "55-58 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "20-24",
+    "38-43",
+    "59-61 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "17-19",
+    "36-37",
+    "62-74 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "16",
+    "35",
+    "75 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Women - Age 30-39"
+ },
+ {
+  "type": "table",
+  "idx": 9,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">22",
+    ">41",
+    "Not specified in Appendix D",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "22",
+    "35-41",
+    "58-65 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "18-21",
+    "29-34",
+    "66-71 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "15-17",
+    "28",
+    "72-80 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "14",
+    "27",
+    "81 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Women - Age 40-49"
+ },
+ {
+  "type": "table",
+  "idx": 10,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">17",
+    ">37",
+    "Not specified in Appendix D",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "17",
+    "29-37",
+    "66-72 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "14-16",
+    "24-28",
+    "73-80 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "12-13",
+    "23",
+    "80-102 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "11",
+    "22",
+    "102 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Women - Age 50-59"
+ },
+ {
+  "type": "table",
+  "idx": 11,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">13",
+    ">29",
+    "Not specified in Appendix D",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "13",
+    "24-29",
+    "66-72 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "10-12",
+    "20-23",
+    "73-80 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "8-9",
+    "18-19",
+    "80-102 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "7",
+    "17",
+    "102 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Heading 2",
+  "text": "Women - Age 60+"
+ },
+ {
+  "type": "table",
+  "idx": 12,
+  "rows": [
+   [
+    "Category",
+    "Push-Ups",
+    "Sit-Ups",
+    "300m Sprint",
+    "Victim Drag"
+   ],
+   [
+    "Superior (100)",
+    ">11",
+    ">27",
+    "Not specified in Appendix D",
+    "165 lb x 25 m"
+   ],
+   [
+    "Excellent (90)",
+    "8-11",
+    "17-27",
+    "66-72 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Good (80)",
+    "6-7",
+    "11-16",
+    "73-80 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Fair (70)",
+    "4-5",
+    "9-10",
+    "80-102 sec",
+    "165 lb x 25 m"
+   ],
+   [
+    "Minimum (60)",
+    "3",
+    "8",
+    "102 sec",
+    "165 lb x 25 m"
+   ]
+  ]
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "11. STANDARDIZED PFT EVENT READ-OUTS"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "The authorized test administrator will read the applicable instructions below immediately before each event."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Push-Ups"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "The push-up event measures the endurance of the chest, shoulder and triceps muscles. On the command 'get set,' assume the front-leaning rest position by placing your hands where they are comfortable for you. Your feet may be together or up to 12 inches apart. When viewed from the side, your body should form a generally straight line from your shoulders to your ankles."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "On the command 'go,' begin the push-up by bending your elbows and lowering your body as a single unit until your upper arms are at least parallel to the ground. Then, return to the starting position by raising your entire body until your arms are fully extended. Your body must remain rigid in a generally straight line and move as a unit while performing each repetition."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "At the end of each repetition, the scorer will state the number of repetitions you have completed correctly. If you fail to keep your body generally straight, to lower your whole body until your upper arms are at least parallel to the ground, or to extend your arms completely, that repetition will not count, and the scorer will repeat the number of the last correctly performed repetition."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "An altered, front- leaning rest position is the only authorized rest position. That is, you may sag in the middle or flex your back. When flexing your back, you may bend your knees, but not to such an extent that you are supporting most of your body weight with your legs. If this occurs, your performance will be terminated. You must return to, and pause in, the correct starting position before continuing. If you rest on the ground or raise either hand or foot from the ground, your performance will be terminated. You may reposition your hands and/or feet during the event as long as they remain in contact with the ground at all times."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Correct performance is important. You have two minutes in which to do as many push-ups as you can. Are there any questions?"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Sit-Ups"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "The sit-up event measures the endurance of the abdominal and hip-flexor muscles. On the command 'get set,' assume the starting position by lying on your back with your knees bent at a 90-degree angle. Your feet may be together or up to 12 inches apart. Another person will hold your ankles with the hands only. No other method of bracing or holding the feet is authorized. The heel is the only part of your foot that must stay in contact with the ground. Your fingers must be interlocked behind your head, and the backs of your hands must touch the ground. Your arms and elbows need not touch the ground."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "On the command 'go,' begin raising your upper body forward to, or beyond, the vertical position. The vertical position means that the base of your neck is above the base of your spine. After you have reached or surpassed the vertical position, lower your body until the bottom of your shoulder blades touches the ground. Your head, hands, arms, or elbows do not have to touch the ground. At the end of each repetition, the scorer will state the number of sit-ups you have correctly completed."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "A repetition will not count if you fail to reach the vertical position, fail to keep your fingers interlocked behind your head, arch or bow your back, raise your buttocks off the ground to raise your upper body or let your knees exceed a 90-degree angle. If a repetition does not count, the scorer will repeat the number of your last correctly performed sit-up."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "The up position is the only authorized rest position. If you stop and rest in the down (starting) position, the event will be terminated. As long as you make a continuous physical effort to sit up, the event will not be terminated. You may not use your hands or any other means to pull or push yourself up to the up (resting) position or to hold yourself In the rest position. If you do so, your performance in the event will be terminated."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Correct performance is important. You will have two minutes to perform as many sit-ups as you can. Are there any questions?"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "300-Meter Sprint"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "The 300-meter sprint is used to assess your anaerobic fitness and leg muscles' endurance. The starter will line the employee(s) up on the starting line. The timer will take a position at the finish line. The timer will keep and operate an official stopwatch and a backup stopwatch. The event is measured in seconds."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "To run the required 300 meters, you must complete (describe the distance based on track). On the command 'OFFICER DOWN,' the employee will begin running at maximum effort. The timer will also begin recording the event time on first full command of 'OFFICER DOWN' and stop the time when the employee crosses the finish line."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "To complete the event, the employee must finish the course at or under the required time for their age and gender. You are being tested on your ability to complete the 300-meter sprint in the shortest time possible. If you are physically helped in any way or leave the designated running course for any reason, you will be disqualified. When you finish the sprint, go to the designated cool-down area."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Employees will have 60 seconds before the next event. Are there any questions?"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "165-lb Victim Drag"
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "The dummy drag is used to assess your lower body strength and endurance. This event is strictly pass/fail and simulates the strength endurance and coordination necessary to perform a victim rescue by dragging a 165-pound dummy a distance of 25 meters (82 feet)."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "After receiving the command 'OFFICER DOWN,' the employee will start at the location of the dummy, grab the dummy by the vest under the arms and drag the dummy until the legs pass the cones. This is to be done using continuous effort without stopping to rest.\nOnce the legs of the dummy pass the cones, the scorer will direct the candidate to drop the dummy and move to the area designated for the cool-down and stretch."
+ },
+ {
+  "type": "p",
+  "style": "Normal",
+  "text": "Do NOT throw the dummy during the event. Are there any questions?"
+ }
+]
