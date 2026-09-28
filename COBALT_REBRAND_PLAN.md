@@ -57,13 +57,21 @@ reference, not treated as one of the 12 deliverables unless Sam says otherwise.
 2. **Done, 2026-09-25 — pure recolor pass** (#1, #2, #3, #4, #7): cobalt + combined
    lockup applied, zero content changes, verified. Delivered as docx (their native
    format — CIFSO forms were already docx-only; #7's source, both the original and
-   the 2026-09-25 upload, is docx).
-3. **Next — #10 and #11** (Incident Report Log, Weekly Activity Report): recolor
+   the 2026-09-25 upload, is docx). Margins/header spacing corrected 2026-09-25
+   after the initial pass (taller co-branded logo needed more header clearance than
+   the original 0.85–0.9in margins gave it) — all 5 documents standardized to 1in
+   margins.
+3. **Done, 2026-09-28 — #6 (PFT Policy)**: built fresh from `PFT_v1.docx`, content
+   verified byte-identical against the source (see `exports/pft-policy/README.md`).
+   User also attached `valletta_incident_report_log.docx` (the same `Mark v2`
+   content already queued for #10) as a design reference — not yet acted on
+   separately, still queued as step 4 below.
+4. **Next — #10 and #11** (Incident Report Log, Weekly Activity Report): recolor
    *plus* swap in the updated content from the `Mark v1`/`Mark v2` files (not pure
    recolors, since the data changed too).
-4. **Then — new builds**: #6 (PFT Policy) and #12 (Incident Event Form), since these
-   need full content structuring and, for #12, real interactive form controls.
-5. **Then — #5**: recolor + relogo the Site Visit Assessment (interactive PDF + docx).
+5. **Then — #12** (Incident Event Form): new build, needs real interactive form
+   controls (dropdowns, date pickers) similar to the Site Visit Assessment.
+6. **Then — #5**: recolor + relogo the Site Visit Assessment (interactive PDF + docx).
 
 ## Open questions for Sam / Israel
 
