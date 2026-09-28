@@ -183,13 +183,15 @@ def build_document(out_name, doc_tag, part_label, sections, narrative_fields):
 
     def draw_header(page, page_num, total_pages):
         page.draw_rect(fitz.Rect(0, 0, PAGE_W, HEADER_H), color=None, fill=BLACK)
-        logo_rect = fitz.Rect(MARGIN_X, 12, MARGIN_X + 62, 12 + 47.6)
+        # logo enlarged 40% (62x47.6 -> 86.8x66.64), vertically re-centered in the header band
+        logo_w, logo_h = 62 * 1.4, 47.6 * 1.4
+        logo_y = (HEADER_H - logo_h) / 2
+        logo_rect = fitz.Rect(MARGIN_X, logo_y, MARGIN_X + logo_w, logo_y + logo_h)
         page.insert_image(logo_rect, filename=os.path.join(HERE, "valletta-soc-lockup.png"), keep_proportion=True)
         tag_w = text_len(doc_tag.upper(), F_BODY_SEMI, 8)
         page.insert_text((PAGE_W - MARGIN_X - tag_w, 30), doc_tag.upper(), fontname=F_BODY_SEMI, fontsize=8, color=WHITE)
         site_val = VISIT_FIELDS[0][2]
-        date_val = VISIT_FIELDS[1][2]
-        sub = f"SITE: {site_val.upper()}  –  {date_val.upper()}"
+        sub = f"SITE: {site_val.upper()}"
         sub_w = text_len(sub, F_BODY, 8)
         page.insert_text((PAGE_W - MARGIN_X - sub_w, 44), sub, fontname=F_BODY, fontsize=8, color=(0.72, 0.73, 0.75))
         page.draw_line((0, HEADER_H), (PAGE_W, HEADER_H), color=COBALT, width=2)
@@ -306,7 +308,7 @@ def build_document(out_name, doc_tag, part_label, sections, narrative_fields):
 
     y = draw_sub_heading(page, y, "Management Narrative and Visit Summary")
     for label, fname, val in narrative_fields:
-        box_h = 130  # taller than the original 70pt — "utilize the whole box" for real narrative writing
+        box_h = 220  # enlarged further per request; text_maxlen is already 0 (unlimited) in add_text_widget
         if y + 16 + box_h > BOTTOM_Y:
             page = new_page()
             y = TOP_Y
