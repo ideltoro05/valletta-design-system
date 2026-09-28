@@ -66,12 +66,21 @@ reference, not treated as one of the 12 deliverables unless Sam says otherwise.
    User also attached `valletta_incident_report_log.docx` (the same `Mark v2`
    content already queued for #10) as a design reference — not yet acted on
    separately, still queued as step 4 below.
-4. **Next — #10 and #11** (Incident Report Log, Weekly Activity Report): recolor
+4. **Done, 2026-09-28 — #5 (Site Visit Assessment)**: recolored to v2.0 *and* split
+   into two independent interactive PDFs per request (Sections I-II unchanged
+   numbering; original III-V renumbered I-III as their own document), so each
+   owner's copy doesn't open to a run of N/A questions that belong to someone
+   else. Also root-caused and fixed a real bug: narrative/comment fields were
+   silently capped at 100 characters (PyMuPDF's `text_maxlen` default, never
+   overridden) — not a line-count issue as it first appeared. See
+   `exports/site-visit-assessment/README.md`. The docx companion was not
+   rebuilt this pass (request was PDF-only, per the format-matching rule) —
+   still reflects the pre-split single-form version if needed later.
+5. **Next — #10 and #11** (Incident Report Log, Weekly Activity Report): recolor
    *plus* swap in the updated content from the `Mark v1`/`Mark v2` files (not pure
    recolors, since the data changed too).
-5. **Then — #12** (Incident Event Form): new build, needs real interactive form
+6. **Then — #12** (Incident Event Form): new build, needs real interactive form
    controls (dropdowns, date pickers) similar to the Site Visit Assessment.
-6. **Then — #5**: recolor + relogo the Site Visit Assessment (interactive PDF + docx).
 
 ## Open questions for Sam / Israel
 
