@@ -120,3 +120,62 @@ One layout bug was caught and fixed during review: the first pass wrapped
 question text without reserving space for the "NN." number prefix, so two
 of the longer first lines (Q15, Q24) ran into the rating dropdown box.
 Fixed by reserving a fixed indent for the prefix before wrapping.
+
+## 2026-09-28 update: split into two forms, cobalt v2.0, narrative-box bug fix
+
+Per request: the single 26-question form was hard to use because whoever owns
+Sections III–V (Training and Personnel Readiness, Equipment/Weapons/Emergency
+Readiness, Overall Performance) received a copy where the first ~11 questions
+(Sections I–II, someone else's job) showed as N/A — looked incomplete to the
+client. Built via a new script, `generate_sva_split.py`, which produces two
+independent interactive PDFs from the same `sva_data.py` source:
+
+| File | Covers | Questions |
+|---|---|---|
+| `valletta_site_visit_assessment_whiskey_staffing_leadership.pdf` | Section I (Staffing and Post Operations), Section II (Leadership, Supervision and Management) | 1–11, unchanged from the original numbering |
+| `valletta_site_visit_assessment_whiskey_training.pdf` | Original Section III renumbered to I (Training and Personnel Readiness), original IV renumbered to II (Equipment, Weapons and Emergency Readiness), original V renumbered to III (Overall Performance and Support Requirements) | 1–15, renumbered so the document reads as its own complete form |
+
+**Only the visible section/question numbers and the internal field names
+changed to match them** — every question's text, every dropdown's option
+list, every currently-selected rating, and every typed comment is unchanged
+from `sva_data.py`. Verified three ways: (1) every rating/comment/option-list
+diffed field-by-field against the source with the correct renumbering
+mapping applied — zero mismatches; (2) every question's text confirmed
+verbatim (whitespace-normalized) in the rendered PDF's extracted text; (3)
+full visual review of both documents' screenshots.
+
+**Total score is now scoped per document.** The original calculation script
+summed all 26 questions across 5 sections; reusing it as-is on a split
+document would have silently ignored the questions that moved to the *other*
+document (their fields no longer exist there) and produced a technically
+different — and easily misread — number. Each split PDF gets its own
+calculation script, built from the actual section/question ranges present in
+that document, still scaled to a 0–500 total on the same formula as the
+original. Cross-checked the static pre-filled score against the same math by
+hand for both documents (Staffing & Leadership: 433/500; Training, Equipment
+& Overall Performance: 411/500) — both correct.
+
+**Narrative-box bug, root cause found and fixed.** The complaint was that the
+narrative summary boxes only allowed about one line of typed text. The box
+height and the multiline flag (`Ff` bit 4096) were already correct — the
+actual cause was `/MaxLen 100`: PyMuPDF's `Widget.text_maxlen` defaults to
+100 characters when left unset, and the original `add_text_widget` helper
+never set it explicitly. That 100-character cap silently applied to *every*
+text field in the document (comments too, not just the narrative boxes) —
+it just wasn't noticed on the comment fields because none of the filled-in
+comments happened to exceed 100 characters. Fixed by explicitly setting
+`w.text_maxlen = 0` (no limit) on every text widget, confirmed at the raw
+PDF level (`pypdf`) that the `/MaxLen` key is now absent entirely from both
+narrative fields, not just reported as 0 by the wrapper API. Narrative boxes
+were also made taller (70pt → 130pt) so there's visibly more room to write
+into, per the request to "utilize the whole box."
+
+**Rebrand:** same v2.0 system as the rest of the document package — Valletta
+Cobalt (`#1B4FA0`) replacing red, and the combined Valletta + SOC lockup
+(`valletta-soc-lockup.png`) in place of the Valletta-only mark used in the
+first pass of this document.
+
+Functionality preserved and re-verified on both split PDFs: all rating
+dropdowns present with their exact original option lists, `NeedAppearances`
+set, comment/narrative fields multiline with no length cap, and the
+`total_score` field read-only with a working calculation script.
