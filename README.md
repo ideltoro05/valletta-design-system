@@ -12,6 +12,39 @@ documents.
 | `tokens.json` | Same system in machine-readable form (colors, type scale, credentials) for tools/scripts to consume |
 | `assets/logo/` | Real Valletta logo files (icon + lockup) |
 | `assets/mission-protect/` | Real Mission Protect product screenshots |
+| `decks/` | Finished presentations (`.pptx`, plus `.pdf` where exported) and the screenshots each deck used |
+| `CLAUDE.md` | Standing instructions Claude follows when it works in this folder (brand rules + the finish-a-deck checklist below) |
+
+## Getting started on a new computer
+
+1. **Install:** [GitHub Desktop](https://desktop.github.com), the [Claude desktop app](https://claude.ai/download),
+   and [Google Drive for desktop](https://www.google.com/drive/download/).
+2. **Clone this repo:** in GitHub Desktop choose **File › Clone repository › URL**, paste
+   `https://github.com/ideltoro05/valletta-design-system.git`, and pick a local folder
+   such as `Documents/valletta-design-system`. Keep it **outside** your Google Drive folder:
+   Drive sync can corrupt a Git repo.
+3. **Get the latest before you start:** click **Fetch origin**, then **Pull origin**.
+4. **Work with Claude:** in the Claude desktop app open the **Code** tab, choose the cloned
+   folder, and ask for what you need, e.g.
+   > "Build a capabilities deck for [client] using the Valletta design system."
+
+   Claude reads `CLAUDE.md` automatically, so it follows the brand rules and the finishing
+   checklist below.
+
+To push changes you need write access: ask Israel to add your GitHub account under the
+repo's **Settings › Collaborators**.
+
+## Finishing a presentation
+
+Every finished deck goes to **both** places:
+
+1. **GitHub:** save it in `decks/` (screenshots in `decks/<Deck_Name>_screenshots/`), then
+   commit and push. In GitHub Desktop: write a short summary, click **Commit**, then **Push origin**.
+2. **Google Drive:** copy the `.pptx` into the client's folder inside
+   [Valletta Industries](https://drive.google.com/drive/folders/1rJkLz4tiAWmZFyTm9ni3WwqvPacGXpYa),
+   e.g. `HHS Training/Presenation`. General capability decks go in `Biz Development`.
+
+If you edit a deck later (in PowerPoint or Google Slides), put the updated file back in both places.
 
 ## What's real vs. extrapolated
 
@@ -22,23 +55,7 @@ neutral palette, the typeface pairing — is a reasoned design system built to m
 site's visual character, since the public site doesn't expose a formal style guide.
 Replace those with real values any time you have them (see "Improving Accuracy" below).
 
-## Uploading to GitHub
-
-1. Create a new repo (e.g. `valletta-design-system`) — private is recommended since this
-   includes company identifiers (UEI/DUNS/CAGE codes)
-2. Upload these three files (and an `assets/` folder if you add logo files) to the repo root
-3. Commit
-
-```bash
-git init
-git add .
-git commit -m "Valletta Industries design system v1.0"
-git branch -M main
-git remote add origin https://github.com/<your-org>/valletta-design-system.git
-git push -u origin main
-```
-
-## Using this with Claude
+## Using this with Claude (without cloning)
 
 **In Claude Design / a Claude Project:**
 - Add `DESIGN_SYSTEM.md` (and `tokens.json`) to the Project's knowledge/files
@@ -47,7 +64,7 @@ git push -u origin main
   > dark mode, following the slide templates in section 6."
 
 **Pulling from GitHub directly in a conversation:**
-- Paste the raw GitHub URL (e.g. `https://raw.githubusercontent.com/<org>/valletta-design-system/main/DESIGN_SYSTEM.md`)
+- Paste the raw GitHub URL (`https://raw.githubusercontent.com/ideltoro05/valletta-design-system/main/DESIGN_SYSTEM.md`)
   and ask Claude to fetch and apply it
 - Or connect the GitHub connector/MCP if you have one enabled, and ask Claude to read the
   file from the repo directly
