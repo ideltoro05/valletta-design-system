@@ -1,0 +1,7 @@
+# OS clutter
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Office lock files created while a deck is open
+~$*
